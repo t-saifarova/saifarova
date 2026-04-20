@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Татьяна Сайфарова — Эксперт по клиентскому сервису</title>
+  <meta name="description" content="Татьяна Сайфарова — консультант, тренер, соавтор методологии реинжиниринга. 15+ лет трансформации клиентского сервиса в крупнейших компаниях Казахстана.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #FF5C35;
+      --orange-hover: #e54a24;
+      --orange-light: #fff4f1;
+      --orange-mid: rgba(255,92,53,0.12);
+      --dark: #16162a;
+      --dark-2: #252540;
+      --text: #2e2e42;
+      --text-light: #72728a;
+      --white: #ffffff;
+      --bg: #f8f8fc;
+      --border: #e4e4f0;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Manrope', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Utility ── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 100px 0; }
+    .label {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 14px;
+    }
+    .title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 50px); color: var(--dark); line-height: 1.15; margin-bottom: 18px; }
+    .subtitle { font-size: 17px; color: var(--text-light); line-height: 1.75; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 30px; border-radius: 50px; font-size: 15px; font-weight: 700;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: all 0.25s; font-family: 'Manrope', sans-serif; letter-spacing: 0.2px;
+    }
+    .btn-primary { background: var(--orange); color: white; }
+    .btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,92,53,0.38); }
+    .btn-outline { background: transparent; color: var(--dark); border: 2px solid var(--dark); padding: 11px 28px; }
+    .btn-outline:hover { background: var(--dark); color: white; }
+    .btn-ghost { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.22); }
+    .btn-ghost:hover { background: var(--orange); border-color: var(--orange); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.94); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 32px rgba(22,22,42,0.09); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 28px; max-width: 1160px; margin: 0 auto;
+    }
+    .logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--dark); text-decoration: none; }
+    .logo span { color: var(--orange); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-cta { padding: 10px 24px; font-size: 14px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 130px 0 90px;
+      background: linear-gradient(160deg, #fff 0%, #fff9f7 55%, #fff4f1 100%);
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,92,53,0.07) 0%, transparent 70%);
+      top: -200px; right: -200px; pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange-light); border: 1px solid rgba(255,92,53,0.22);
+      padding: 7px 18px; border-radius: 28px; margin-bottom: 26px;
+      font-size: 13px; font-weight: 600; color: var(--orange);
+    }
+    .hero-pill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); animation: blink 2.2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    .hero-h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 5vw, 64px); color: var(--dark); line-height: 1.08; margin-bottom: 22px; }
+    .hero-h1 em { color: var(--orange); font-style: normal; position: relative; }
+    .hero-p { font-size: 17px; color: var(--text-light); max-width: 460px; line-height: 1.75; margin-bottom: 40px; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 60px; }
+    .hero-stats { display: flex; gap: 48px; padding-top: 44px; border-top: 1px solid var(--border); }
+    .stat-n { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--dark); line-height: 1; }
+    .stat-n sup { color: var(--orange); font-size: 24px; }
+    .stat-t { font-size: 12px; color: var(--text-light); margin-top: 5px; line-height: 1.4; }
+
+    /* Photo col */
+    .hero-photo-col { position: relative; display: flex; justify-content: flex-end; }
+    .hero-photo-blob {
+      position: absolute; width: 420px; height: 520px;
+      background: linear-gradient(150deg, rgba(255,92,53,0.13) 0%, rgba(255,92,53,0.04) 100%);
+      border-radius: 50% 60% 55% 45% / 45% 50% 55% 50%;
+      top: 10px; right: -10px;
+    }
+    .hero-photo {
+      position: relative; z-index: 1;
+      width: 390px; height: 510px;
+      border-radius: 45% 55% 55% 45% / 35% 35% 65% 65%;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(22,22,42,0.16);
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .hero-photo-ph {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #e4e4f0, #c8c8e0);
+      display: flex; align-items: center; justify-content: center; font-size: 80px;
+    }
+    .hero-float {
+      position: absolute; bottom: 48px; left: -36px; z-index: 2;
+      background: white; border-radius: 18px; padding: 16px 20px;
+      box-shadow: 0 16px 56px rgba(22,22,42,0.14);
+      display: flex; align-items: center; gap: 14px; min-width: 260px;
+    }
+    .hero-float-icon {
+      width: 48px; height: 48px; background: var(--orange-light); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+    }
+    .hero-float-title { font-size: 14px; font-weight: 700; color: var(--dark); }
+    .hero-float-sub { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .about-photo {
+      width: 100%; height: 520px; border-radius: 28px;
+      overflow: hidden; box-shadow: 0 24px 60px rgba(22,22,42,0.12); position: relative;
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .about-photo-ph {
+      width: 100%; height: 100%; background: linear-gradient(145deg, #e4e4f0, #c8c8e0);
+      display: flex; align-items: center; justify-content: center; font-size: 80px;
+    }
+    .about-text { padding-top: 8px; }
+    .about-text p { font-size: 16px; line-height: 1.85; color: var(--text-light); margin-bottom: 18px; }
+    .about-text p.lead { font-size: 18px; color: var(--dark); font-weight: 500; line-height: 1.7; }
+    .about-dark {
+      margin-top: 40px;
+      background: var(--dark); border-radius: 24px; padding: 40px 36px;
+    }
+    .about-dark .label { color: rgba(255,92,53,0.85); }
+    .about-quote {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 20px; color: white; line-height: 1.55; margin-bottom: 28px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 7px 15px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 24px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8);
+      transition: all 0.2s; cursor: default;
+    }
+    .chip:hover { background: var(--orange); border-color: var(--orange); color: white; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+    .services-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 52px; flex-wrap: wrap; gap: 24px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .scard {
+      background: white; border-radius: 26px; padding: 40px 36px;
+      border: 1.5px solid var(--border); transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .scard::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--border); transition: background 0.3s;
+    }
+    .scard:hover { transform: translateY(-10px); box-shadow: 0 28px 72px rgba(22,22,42,0.1); border-color: transparent; }
+    .scard:hover::after { background: var(--orange); }
+    .scard.featured { background: var(--dark); border-color: transparent; }
+    .scard.featured::after { background: var(--orange); }
+    .scard.featured .stitle, .scard.featured .sdesc, .scard.featured .sprice { color: white; }
+    .scard.featured .slist li { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.1); }
+    .scard.featured .slist li::before { color: var(--orange); }
+    .scard.featured .sprice-num { color: white; }
+    .sbadge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: var(--orange); color: white; font-size: 10px; font-weight: 800;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px;
+    }
+    .sicon {
+      width: 54px; height: 54px; background: var(--orange-light); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 22px;
+    }
+    .scard.featured .sicon { background: rgba(255,92,53,0.18); }
+    .stitle { font-size: 20px; font-weight: 800; color: var(--dark); margin-bottom: 10px; line-height: 1.3; }
+    .sdesc { font-size: 14px; color: var(--text-light); line-height: 1.7; margin-bottom: 22px; }
+    .slist { list-style: none; margin-bottom: 26px; }
+    .slist li {
+      font-size: 13px; color: var(--text-light); padding: 7px 0;
+      border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px;
+    }
+    .slist li::before { content: '→'; color: var(--orange); flex-shrink: 0; font-weight: 700; }
+    .sprice { font-size: 13px; color: var(--text-light); margin-bottom: 26px; }
+    .sprice-num { font-size: 22px; font-weight: 800; color: var(--dark); }
+
+    /* ── COURSE ── */
+    #course { background: white; }
+    .course-card {
+      background: var(--dark);
+      border-radius: 40px; padding: 72px 64px;
+      display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .course-card::before {
+      content: ''; position: absolute; pointer-events: none;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,92,53,0.18) 0%, transparent 65%);
+      bottom: -150px; right: -100px;
+    }
+    .course-card::after {
+      content: ''; position: absolute; pointer-events: none;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,92,53,0.1) 0%, transparent 65%);
+      top: -80px; left: 200px;
+    }
+    .course-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); padding: 8px 18px; border-radius: 24px;
+      font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+      color: white; margin-bottom: 22px;
+    }
+    .course-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3vw, 44px); color: white; margin-bottom: 16px; line-height: 1.15; }
+    .course-sub { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 36px; max-width: 560px; }
+    .course-modules { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .cmod {
+      padding: 7px 15px; border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 22px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.75);
+      transition: all 0.2s; cursor: default;
+    }
+    .cmod:hover { background: var(--orange); border-color: var(--orange); color: white; }
+    .course-right {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px; padding: 40px 36px; text-align: center; position: relative; z-index: 1;
+    }
+    .course-coming { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+    .course-big { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 700; color: white; line-height: 1; margin-bottom: 4px; }
+    .course-unit { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+    .course-right .btn { width: 100%; margin-bottom: 12px; }
+
+    /* ── CASES ── */
+    #cases { background: var(--bg); }
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+    .ccase {
+      background: white; border-radius: 26px; padding: 40px 36px;
+      border: 1.5px solid var(--border); transition: all 0.3s;
+    }
+    .ccase:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(22,22,42,0.09); border-color: transparent; }
+    .ccase-co {
+      font-size: 11px; font-weight: 800; color: var(--text-light); letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 28px; padding-bottom: 18px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .ccase-num { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; color: var(--orange); line-height: 1; margin-bottom: 6px; }
+    .ccase-metric { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 14px; line-height: 1.4; }
+    .ccase-desc { font-size: 14px; color: var(--text-light); line-height: 1.75; }
+
+    /* ── SOCIAL ── */
+    #social { background: white; }
+    .social-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+    .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .ig-cell {
+      aspect-ratio: 1; border-radius: 18px; overflow: hidden;
+      position: relative; cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .ig-cell:hover { transform: scale(1.04); box-shadow: 0 16px 40px rgba(22,22,42,0.14); }
+    .ig-cell img { width: 100%; height: 100%; object-fit: cover; }
+    .ig-overlay {
+      position: absolute; inset: 0; background: rgba(22,22,42,0.68);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.25s; color: white; font-size: 14px; font-weight: 700;
+    }
+    .ig-cell:hover .ig-overlay { opacity: 1; }
+    .ig-ph {
+      width: 100%; height: 100%; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; color: var(--text-light); font-size: 13px; font-weight: 500;
+    }
+    .ig-ph-icon { font-size: 30px; }
+    .ig-last {
+      background: linear-gradient(145deg, var(--orange), #ff7b5c);
+    }
+    .ig-last-inner {
+      width: 100%; height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: white; padding: 20px; text-align: center;
+    }
+    .ig-last-arrow { font-size: 32px; }
+    .ig-last-text { font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .social-follow { text-align: center; margin-top: 36px; font-size: 15px; color: var(--text-light); }
+    .social-follow a { color: var(--orange); font-weight: 700; text-decoration: none; }
+    .social-follow a:hover { text-decoration: underline; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--dark); }
+    #contact .title { color: white; }
+    #contact .subtitle { color: rgba(255,255,255,0.55); }
+    #contact .label { color: rgba(255,92,53,0.9); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: start; margin-top: 56px; }
+    .cinfo-promise { font-size: 17px; color: rgba(255,255,255,0.75); line-height: 1.8; margin: 28px 0 40px; }
+    .cinfo-items { display: flex; flex-direction: column; gap: 22px; }
+    .cinfo-item { display: flex; align-items: center; gap: 16px; }
+    .cinfo-icon {
+      width: 50px; height: 50px; background: rgba(255,92,53,0.15); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+    }
+    .cinfo-lbl { font-size: 11px; color: rgba(255,255,255,0.38); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+    .cinfo-val { font-size: 15px; font-weight: 700; color: white; }
+
+    /* Form card */
+    .form-card { background: white; border-radius: 32px; padding: 48px 44px; }
+    .form-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fg { margin-bottom: 16px; }
+    .fg label { display: block; font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 7px; letter-spacing: 0.3px; text-transform: uppercase; }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; padding: 13px 16px; border: 1.5px solid var(--border);
+      border-radius: 12px; font-family: 'Manrope', sans-serif; font-size: 15px;
+      color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s, background 0.2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--orange); background: white;
+      box-shadow: 0 0 0 3px rgba(255,92,53,0.1);
+    }
+    .fg textarea { resize: vertical; min-height: 96px; }
+    .form-btn { width: 100%; padding: 15px; font-size: 16px; border-radius: 14px; margin-top: 6px; }
+    .form-note { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 10px; }
+
+    /* Checkboxes */
+    .checks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+    .check-item { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+    .check-item input[type="checkbox"] { display: none; }
+    .check-box {
+      width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 6px;
+      background: var(--bg); flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.18s;
+    }
+    .check-box::after { content: ''; width: 5px; height: 9px; border: 2px solid white; border-top: none; border-left: none; transform: rotate(45deg) translateY(-1px); opacity: 0; transition: opacity 0.15s; }
+    .check-item input:checked + .check-box { background: var(--orange); border-color: var(--orange); }
+    .check-item input:checked + .check-box::after { opacity: 1; }
+    .check-label { font-size: 13px; color: var(--text); line-height: 1.4; padding-top: 1px; user-select: none; }
+    .check-item:hover .check-box { border-color: var(--orange); }
+
+    /* ── Admin panel ── */
+    #admin-panel {
+      display: none; position: fixed; top: 0; right: 0; bottom: 0; z-index: 9999;
+      width: 360px; background: white;
+      box-shadow: -8px 0 48px rgba(22,22,42,0.18);
+      flex-direction: column; overflow: hidden;
+    }
+    #admin-panel.open { display: flex; }
+    .ap-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 24px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .ap-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); }
+    .ap-close {
+      width: 36px; height: 36px; border-radius: 10px; background: var(--bg);
+      border: none; cursor: pointer; font-size: 18px; color: var(--text-light);
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .ap-close:hover { background: #ffe8e2; color: var(--orange); }
+    .ap-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+    .ap-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light); margin-bottom: 12px; }
+    .ap-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+    .ap-topic {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 14px; background: var(--bg); border-radius: 10px;
+      border: 1px solid var(--border); transition: border-color 0.2s;
+    }
+    .ap-topic:hover { border-color: var(--orange); }
+    .ap-topic-text { font-size: 14px; color: var(--text); flex: 1; }
+    .ap-del {
+      width: 28px; height: 28px; border-radius: 8px; background: transparent;
+      border: none; cursor: pointer; font-size: 16px; color: var(--text-light);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s;
+    }
+    .ap-del:hover { background: #ffe8e2; color: #e03a1a; }
+    .ap-add-row { display: flex; gap: 8px; }
+    .ap-add-row input {
+      flex: 1; padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px;
+      color: var(--text); outline: none; transition: border-color 0.2s;
+    }
+    .ap-add-row input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,92,53,0.1); }
+    .ap-add-btn {
+      padding: 11px 16px; background: var(--orange); color: white; border: none;
+      border-radius: 10px; font-size: 20px; cursor: pointer; transition: background 0.2s;
+      line-height: 1; display: flex; align-items: center; justify-content: center;
+    }
+    .ap-add-btn:hover { background: var(--orange-hover); }
+    .ap-foot {
+      padding: 16px 24px; border-top: 1px solid var(--border); flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .ap-saved {
+      text-align: center; font-size: 13px; font-weight: 600; color: #2dac6b;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .ap-saved.show { opacity: 1; }
+    #admin-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(22,22,42,0.35);
+      z-index: 9998; backdrop-filter: blur(2px);
+    }
+    #admin-overlay.open { display: block; }
+
+    .form-success { display: none; text-align: center; padding: 56px 24px; }
+    .form-success.show { display: block; }
+    .form-success-icon { font-size: 60px; margin-bottom: 16px; }
+    .form-success h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--dark); margin-bottom: 8px; }
+    .form-success p { font-size: 16px; color: var(--text-light); line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer { background: #0e0e1c; padding: 52px 0 36px; }
+    .footer-top {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 28px;
+      padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: white; text-decoration: none; }
+    .footer-logo span { color: var(--orange); }
+    .footer-nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-nav a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .footer-nav a:hover { color: white; }
+    .footer-socials { display: flex; gap: 10px; }
+    .fsoc {
+      width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.65);
+      text-decoration: none; transition: all 0.22s;
+    }
+    .fsoc:hover { background: var(--orange); color: white; }
+    .footer-bottom { text-align: center; font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 28px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-photo-col { order: -1; justify-content: center; }
+      .hero-photo { width: 320px; height: 400px; }
+      .hero-float { left: 0; bottom: 20px; }
+      .hero-stats { gap: 32px; }
+      .services-grid, .cases-grid { grid-template-columns: 1fr; max-width: 520px; }
+      .social-grid { grid-template-columns: repeat(2, 1fr); }
+      .course-card { grid-template-columns: 1fr; padding: 48px 36px; }
+      .course-right { text-align: left; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: fixed;
+        top: 70px; left: 0; right: 0; background: white;
+        padding: 24px 28px; border-bottom: 1px solid var(--border);
+        gap: 22px; z-index: 999; box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      }
+      .hamburger { display: flex; }
+      .section { padding: 72px 0; }
+      .hero-stats { flex-direction: column; gap: 20px; }
+      .social-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-card { padding: 32px 24px; }
+      .course-card { padding: 40px 28px; }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="logo">Сайфарова<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#course">Курс</a></li>
+      <li><a href="#cases">Кейсы</a></li>
+      <li><a href="#social">Блог</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="#contact" class="btn btn-primary nav-cta">Записаться</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          Эксперт по клиентскому сервису · Казахстан
+        </div>
+        <h1 class="hero-h1">
+          Превращаю<br>клиентский сервис<br>в <em>источник роста</em>
+        </h1>
+        <p class="hero-p">
+          Татьяна Сайфарова — консультант, тренер и соавтор методологии реинжиниринга. Работаю с топ-менеджментом крупнейших компаний и государственных структур Казахстана.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Записаться на сессию</a>
+          <a href="#services" class="btn btn-outline">Узнать об услугах</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-n">15<sup>+</sup></div>
+            <div class="stat-t">лет экспертизы<br>в клиентском сервисе</div>
+          </div>
+          <div>
+            <div class="stat-n">50<sup>+</sup></div>
+            <div class="stat-t">проектов<br>трансформации</div>
+          </div>
+          <div>
+            <div class="stat-n">3</div>
+            <div class="stat-t">нацкомпании<br>в портфеле</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo-col">
+        <div class="hero-photo-blob"></div>
+        <div class="hero-photo">
+          <img src="images/photo-hero.jpg" alt="Татьяна Сайфарова"
+               onerror="this.parentElement.innerHTML='<div class=hero-photo-ph>👤</div>'">
+        </div>
+        <div class="hero-float">
+          <div class="hero-float-icon">🎓</div>
+          <div>
+            <div class="hero-float-title">Stanford d.school</div>
+            <div class="hero-float-sub">Certified Design Thinking Trainer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <img src="images/photo-about.jpg" alt="Татьяна Сайфарова — эксперт"
+             onerror="this.parentElement.innerHTML='<div class=about-photo-ph>👤</div>'">
+      </div>
+      <div class="about-text">
+        <div class="label">Обо мне</div>
+        <h2 class="title">Эксперт, который работает<br>на стыке управления,<br>технологий и сервиса</h2>
+        <p class="lead">
+          Я помогаю руководителям перестроить клиентский сервис так, чтобы он работал как двигатель бизнеса — а не как центр затрат.
+        </p>
+        <p>
+          Более 15 лет я занимаюсь трансформацией клиентских систем — от контакт-центров до омниканальных платформ обслуживания. Среди моих клиентов — Казахтелеком, Казпочта, государственные органы Казахстана и десятки компаний в разных секторах.
+        </p>
+        <p>
+          Соучредитель Казахстанской ассоциации экспертов клиентского сервиса. Сертифицированный тренер по методологии Stanford d.school. Соавтор методологии реинжиниринга бизнес-процессов для государственных и коммерческих организаций.
+        </p>
+        <div class="about-dark reveal">
+          <div class="label">Моя позиция</div>
+          <p class="about-quote">
+            «Клиентский сервис — это не затраты.<br>
+            Это точка роста, которую большинство<br>компаний ещё не открыли.»
+          </p>
+          <div class="chips">
+            <span class="chip">Design Thinking</span>
+            <span class="chip">Human-Centered Design</span>
+            <span class="chip">Customer Journey Map</span>
+            <span class="chip">ISO 18295 / COPC</span>
+            <span class="chip">Реинжиниринг БП</span>
+            <span class="chip">Трансформация КЦ</span>
+            <span class="chip">AI-аналитика</span>
+            <span class="chip">NPS & CX-стратегия</span>
+            <span class="chip">Омниканальность</span>
+            <span class="chip">BPMN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="services-head">
+      <div>
+        <div class="label">Услуги</div>
+        <h2 class="title" style="margin-bottom:0;">Форматы работы</h2>
+      </div>
+      <p class="subtitle" style="max-width:380px;">От личной сессии<br>до полной трансформации компании</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Card 1 -->
+      <div class="scard reveal">
+        <div class="sicon">🎯</div>
+        <h3 class="stitle">Стратегическая сессия 1:1</h3>
+        <p class="sdesc">За одну встречу вы получите ясность: что именно мешает вашему сервису расти — и конкретный план действий на руки.</p>
+        <ul class="slist">
+          <li>Диагностика вашей сервисной модели</li>
+          <li>Выявление скрытых точек потерь и роста</li>
+          <li>Конкретные рекомендации с планом</li>
+          <li>Онлайн или офлайн, 2–3 часа</li>
+        </ul>
+        <div class="sprice">Индивидуальная <span class="sprice-num">стоимость</span></div>
+        <a href="#contact" class="btn btn-primary" style="width:100%;">Записаться</a>
+      </div>
+
+      <!-- Card 2 — Featured -->
+      <div class="scard featured reveal">
+        <div class="sbadge">Топ-формат</div>
+        <div class="sicon">👥</div>
+        <h3 class="stitle">Интенсив для топ-команды</h3>
+        <p class="sdesc">Групповая работа с первыми лицами компании: создаём CX-стратегию, которая превращает клиентов в адвокатов бренда.</p>
+        <ul class="slist">
+          <li>Анализ клиентского опыта компании</li>
+          <li>Разработка CX-стратегии с командой</li>
+          <li>Оценка и перестройка KPI клиентских подразделений</li>
+          <li>Дорожная карта трансформации</li>
+        </ul>
+        <div class="sprice">от <span class="sprice-num">950 000 ₸</span> / 1 месяц</div>
+        <a href="#contact" class="btn btn-primary" style="width:100%;">Обсудить проект</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="scard reveal">
+        <div class="sicon">📊</div>
+        <h3 class="stitle">Корпоративный тренинг</h3>
+        <p class="sdesc">Системное обучение команды — от операторов до руководящего состава — по авторской методологии.</p>
+        <ul class="slist">
+          <li>Клиентский сервис и CX-мышление</li>
+          <li>Реинжиниринг бизнес-процессов</li>
+          <li>Продажи и работа с клиентами</li>
+          <li>Эмоциональный интеллект в сервисе</li>
+        </ul>
+        <div class="sprice">от <span class="sprice-num">1 100 000 ₸</span> / 8 недель</div>
+        <a href="#contact" class="btn btn-outline" style="width:100%;">Запросить программу</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ COURSE ══ -->
+<section id="course" class="section">
+  <div class="container">
+    <div class="course-card reveal">
+      <div>
+        <div class="course-badge">🎓 Авторский онлайн-курс</div>
+        <h2 class="course-title">
+          Клиентология:<br>Экономика впечатлений
+        </h2>
+        <p class="course-sub">
+          Первый в Казахстане полноценный MBA-курс по клиентскому сервису. Полный жизненный цикл клиента — от разработки CX-стратегии и первого касания до удержания и превращения в адвоката бренда.
+        </p>
+        <div class="course-modules">
+          <span class="cmod">Модуль 1 · CX-стратегия и экономика впечатлений</span>
+          <span class="cmod">Модуль 2 · Технологии и AI в сервисе</span>
+          <span class="cmod">Модуль 3 · Операционное управление и WFM</span>
+          <span class="cmod">Модуль 4 · Фронтлайн, EQ и психология диалога</span>
+          <span class="cmod">Модуль 5 · Лидогенерация и омниканальные продажи</span>
+          <span class="cmod">Модуль 6 · Удержание клиентов и управление NPS</span>
+        </div>
+        <a href="#contact" class="btn btn-primary">Записаться в лист ожидания →</a>
+      </div>
+      <div class="course-right">
+        <div class="course-coming">Скоро</div>
+        <div class="course-big">6</div>
+        <div class="course-unit">модулей<br>полный цикл CX</div>
+        <a href="#contact" class="btn btn-ghost" style="width:100%;margin-bottom:12px;">Получить уведомление о старте</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CASES ══ -->
+<section id="cases" class="section">
+  <div class="container">
+    <div class="label">Кейсы</div>
+    <h2 class="title">Результаты, которые<br>говорят сами за себя</h2>
+    <p class="subtitle">Реальные проекты трансформации в крупнейших компаниях<br>и государственных организациях Казахстана</p>
+    <div class="cases-grid">
+
+      <div class="ccase reveal">
+        <div class="ccase-co">АО Казпочта</div>
+        <div class="ccase-num">−50%</div>
+        <div class="ccase-metric">сокращение времени обслуживания клиентов</div>
+        <p class="ccase-desc">Аудит клиентских процессов по всей сети фронт-офисов, стандартизация сервиса и оптимизация клиентского пути. Результат — время обслуживания сократилось вдвое по всей филиальной сети страны.</p>
+      </div>
+
+      <div class="ccase reveal">
+        <div class="ccase-co">АО Казахтелеком</div>
+        <div class="ccase-num">↑ NPS</div>
+        <div class="ccase-metric">трансформация КЦ: из центра затрат — в центр прибыли</div>
+        <p class="ccase-desc">Разработка модели трансформации контакт-центра, внедрение AI-аналитики обращений, омниканальная архитектура обслуживания. Снижение повторных обращений за счёт редизайна клиентских сценариев.</p>
+      </div>
+
+      <div class="ccase reveal">
+        <div class="ccase-co">МЦРИАП · Цифровое правительство РК</div>
+        <div class="ccase-num">G4C</div>
+        <div class="ccase-metric">реинжиниринг государственных услуг для граждан и бизнеса</div>
+        <p class="ccase-desc">Разработка методологии реинжиниринга бизнес-процессов для госорганов. Внедрение человекоцентричного проектирования в архитектуру государственных цифровых сервисов.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOCIAL ══ -->
+<section id="social" class="section">
+  <div class="container">
+    <div class="social-top">
+      <div>
+        <div class="label">Блог</div>
+        <h2 class="title" style="margin-bottom:0;">Актуально о клиентском сервисе</h2>
+      </div>
+      <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="btn btn-outline">
+        @tanyasaifarova
+      </a>
+    </div>
+    <div class="social-grid">
+      <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell">
+        <div class="ig-ph"><div class="ig-ph-icon">📸</div><div>Instagram</div></div>
+        <div class="ig-overlay">Смотреть →</div>
+      </a>
+      <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell">
+        <div class="ig-ph"><div class="ig-ph-icon">📸</div><div>Instagram</div></div>
+        <div class="ig-overlay">Смотреть →</div>
+      </a>
+      <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell">
+        <div class="ig-ph"><div class="ig-ph-icon">📸</div><div>Instagram</div></div>
+        <div class="ig-overlay">Смотреть →</div>
+      </a>
+      <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell ig-last">
+        <div class="ig-last-inner">
+          <div class="ig-last-arrow">→</div>
+          <div class="ig-last-text">Все публикации<br>в Instagram</div>
+        </div>
+      </a>
+    </div>
+    <p class="social-follow">
+      Подписывайтесь:&nbsp;
+      <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener">Instagram</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.facebook.com/share/1KFdpJtT4v/" target="_blank" rel="noopener">Facebook</a>
+    </p>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="label">Контакты</div>
+    <h2 class="title">Начните трансформацию<br>сегодня</h2>
+    <p class="subtitle">Напишите — и я лично свяжусь с вами в течение 24 часов</p>
+    <div class="contact-grid">
+      <div>
+        <p class="cinfo-promise">
+          Разберём вашу задачу и подберём оптимальный формат работы — личная сессия, тренинг для команды или консалтинговый проект.
+        </p>
+        <div class="cinfo-items">
+          <div class="cinfo-item">
+            <div class="cinfo-icon">📧</div>
+            <div>
+              <div class="cinfo-lbl">Email</div>
+              <div class="cinfo-val">t.saifarova@gmail.com</div>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-icon">📱</div>
+            <div>
+              <div class="cinfo-lbl">Телефон / WhatsApp</div>
+              <div class="cinfo-val">+7 (701) 403-43-96</div>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-icon">📍</div>
+            <div>
+              <div class="cinfo-lbl">Локация</div>
+              <div class="cinfo-val">Астана, Казахстан · онлайн по всему миру</div>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF5C35"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <div>
+              <div class="cinfo-lbl">Instagram</div>
+              <div class="cinfo-val">@tanyasaifarova</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-card" id="leadFormCard">
+          <h3>Записаться на встречу</h3>
+          <div id="leadForm">
+            <div class="form-row">
+              <div class="fg">
+                <label>Имя *</label>
+                <input type="text" id="fname" placeholder="Ваше имя">
+              </div>
+              <div class="fg">
+                <label>Телефон *</label>
+                <input type="tel" id="fphone" placeholder="+7 (___) ___-__-__">
+              </div>
+            </div>
+            <div class="fg">
+              <label>Email *</label>
+              <input type="email" id="femail" placeholder="you@company.com">
+            </div>
+            <div class="fg">
+              <label>Вас интересует</label>
+              <select id="fservice">
+                <option value="">— Выберите формат —</option>
+                <option>Стратегическая сессия 1:1</option>
+                <option>Интенсив для топ-команды</option>
+                <option>Корпоративный тренинг</option>
+                <option>Курс «Клиентология»</option>
+                <option>Консалтинговый проект</option>
+                <option>Другое</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>С чем хотите разобраться? (можно несколько)</label>
+              <div class="checks-grid" id="checksGrid"></div>
+            </div>
+            <div class="fg">
+              <label>Свой вопрос или комментарий</label>
+              <textarea id="fmessage" placeholder="Опишите свою ситуацию или добавьте любой вопрос..."></textarea>
+            </div>
+            <button class="btn btn-primary form-btn" onclick="submitForm()">Отправить заявку →</button>
+            <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <div class="form-success-icon">✅</div>
+            <h3>Отлично!</h3>
+            <p>Открылся WhatsApp с вашей заявкой.<br>
+            Нажмите <strong>«Отправить»</strong> — и Татьяна<br>
+            свяжется с вами в течение 24 часов.</p>
+            <p style="margin-top:16px;font-size:14px;">
+              Если WhatsApp не открылся —<br>
+              напишите напрямую:
+              <a href="https://wa.me/77014034396" target="_blank"
+                 style="color:var(--orange);font-weight:700;text-decoration:none;">
+                +7 (701) 403-43-96
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a href="#hero" class="footer-logo">Сайфарова<span>.</span></a>
+      <nav class="footer-nav">
+        <a href="#about">Обо мне</a>
+        <a href="#services">Услуги</a>
+        <a href="#course">Курс</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="fsoc" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/1KFdpJtT4v/" target="_blank" rel="noopener" class="fsoc" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Татьяна Сайфарова · Эксперт по клиентскому сервису · Астана, Казахстан
+    </div>
+  </div>
+</footer>
+
+<!-- ══ ADMIN PANEL ══ -->
+<div id="admin-overlay" onclick="closeAdmin()"></div>
+<div id="admin-panel">
+  <div class="ap-head">
+    <div class="ap-title">Темы в форме</div>
+    <button class="ap-close" onclick="closeAdmin()">✕</button>
+  </div>
+  <div class="ap-body">
+    <div class="ap-label">Текущие темы</div>
+    <div class="ap-list" id="apList"></div>
+    <div class="ap-label">Добавить тему</div>
+    <div class="ap-add-row">
+      <input type="text" id="apInput" placeholder="Введите новую тему..." maxlength="60"
+             onkeydown="if(event.key==='Enter')addTopic()">
+      <button class="ap-add-btn" onclick="addTopic()">+</button>
+    </div>
+  </div>
+  <div class="ap-foot">
+    <div class="ap-saved" id="apSaved">✓ Сохранено</div>
+    <button class="btn btn-primary" style="width:100%;border-radius:12px;" onclick="saveTopics()">
+      Сохранить изменения
+    </button>
+  </div>
+</div>
+
+<script>
+  // ── Nav scroll shadow ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── Mobile menu ──
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ══════════════════════════════════════════════════════════════
+  // WHATSAPP (CallMeBot)
+  // 1. Напишите на +34 644 33 63 09: I allow callmebot to send me messages
+  // 2. Получите API ключ в ответном сообщении
+  // 3. Вставьте ключ в CALLMEBOT_API_KEY ниже
+  // ══════════════════════════════════════════════════════════════
+  const WHATSAPP_PHONE    = '77014034396';
+  const CALLMEBOT_API_KEY = 'ВСТАВЬТЕ_КЛЮЧ_СЮДА';
+
+  function sendWhatsApp(name, phone, email, service, topics, message) {
+    if (CALLMEBOT_API_KEY === 'ВСТАВЬТЕ_КЛЮЧ_СЮДА') return;
+    const text = encodeURIComponent(
+      '🔔 Новая заявка с сайта saifarova.com\n\n' +
+      '👤 Имя: '    + name                       + '\n' +
+      '📱 Тел: '    + phone                      + '\n' +
+      '📧 Email: '  + email                      + '\n' +
+      '📋 Услуга: ' + (service  || 'не выбрано') + '\n' +
+      '✅ Темы: '   + (topics   || 'не выбраны') + '\n' +
+      '💬 '         + (message  || '—')
+    );
+    new Image().src =
+      'https://api.callmebot.com/whatsapp.php' +
+      '?phone='  + WHATSAPP_PHONE +
+      '&text='   + text +
+      '&apikey=' + CALLMEBOT_API_KEY;
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ТЕМЫ ФОРМЫ — управление через панель (3 клика по логотипу)
+  // Хранятся в localStorage браузера
+  // ══════════════════════════════════════════════════════════════
+  const DEFAULT_TOPICS = [
+    'KPI контакт-центра',
+    'Стратегия клиентского сервиса',
+    'Сократить время обработки обращений',
+    'Улучшить NPS / лояльность',
+    'Обучение команды',
+    'Реинжиниринг бизнес-процессов',
+    'Анализ клиентского опыта (CJM)',
+    'Омниканальное обслуживание',
+    'AI и автоматизация в сервисе',
+    'Курс «Клиентология»'
+  ];
+
+  function getTopics() {
+    try {
+      const saved = localStorage.getItem('saifarova_topics');
+      return saved ? JSON.parse(saved) : DEFAULT_TOPICS;
+    } catch(e) { return DEFAULT_TOPICS; }
+  }
+
+  function saveTopics() {
+    const items = [...document.querySelectorAll('#apList .ap-topic-text')]
+      .map(el => el.textContent.trim())
+      .filter(t => t.length > 0);
+    localStorage.setItem('saifarova_topics', JSON.stringify(items));
+    renderForm();
+    const saved = document.getElementById('apSaved');
+    saved.classList.add('show');
+    setTimeout(() => saved.classList.remove('show'), 2000);
+  }
+
+  // Отрисовать чекбоксы в форме
+  function renderForm() {
+    const topics = getTopics();
+    const grid = document.getElementById('checksGrid');
+    if (!grid) return;
+    grid.innerHTML = topics.map(t => `
+      <label class="check-item">
+        <input type="checkbox" value="${t.replace(/"/g, '&quot;')}">
+        <span class="check-box"></span>
+        <span class="check-label">${t}</span>
+      </label>
+    `).join('');
+  }
+
+  // Отрисовать список в панели управления
+  function renderAdmin() {
+    const topics = getTopics();
+    document.getElementById('apList').innerHTML = topics.map((t, i) => `
+      <div class="ap-topic">
+        <span class="ap-topic-text">${t}</span>
+        <button class="ap-del" onclick="deleteTopic(${i})" title="Удалить">✕</button>
+      </div>
+    `).join('') || '<div style="color:var(--text-light);font-size:13px;padding:8px 0;">Список пуст</div>';
+  }
+
+  function deleteTopic(i) {
+    const topics = getTopics();
+    topics.splice(i, 1);
+    localStorage.setItem('saifarova_topics', JSON.stringify(topics));
+    renderAdmin();
+  }
+
+  function addTopic() {
+    const input = document.getElementById('apInput');
+    const val = input.value.trim();
+    if (!val) return;
+    const topics = getTopics();
+    if (topics.includes(val)) { input.select(); return; }
+    topics.push(val);
+    localStorage.setItem('saifarova_topics', JSON.stringify(topics));
+    input.value = '';
+    renderAdmin();
+    // Подсветить добавленный
+    const items = document.querySelectorAll('#apList .ap-topic');
+    if (items.length) {
+      const last = items[items.length - 1];
+      last.style.borderColor = 'var(--orange)';
+      setTimeout(() => last.style.borderColor = '', 1500);
+    }
+  }
+
+  // ── Открыть / закрыть панель ──
+  function openAdmin() {
+    renderAdmin();
+    document.getElementById('admin-panel').classList.add('open');
+    document.getElementById('admin-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAdmin() {
+    document.getElementById('admin-panel').classList.remove('open');
+    document.getElementById('admin-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // 3 быстрых клика по логотипу → открыть панель
+  let logoClicks = 0, logoTimer;
+  document.querySelector('.logo').addEventListener('click', (e) => {
+    e.preventDefault();
+    logoClicks++;
+    clearTimeout(logoTimer);
+    logoTimer = setTimeout(() => { logoClicks = 0; }, 600);
+    if (logoClicks >= 3) { logoClicks = 0; openAdmin(); }
+  });
+
+  // ── Form submit ──
+  function submitForm() {
+    const name    = document.getElementById('fname').value.trim();
+    const phone   = document.getElementById('fphone').value.trim();
+    const email   = document.getElementById('femail').value.trim();
+    const service = document.getElementById('fservice').value;
+    const message = document.getElementById('fmessage').value.trim();
+    const checked = [...document.querySelectorAll('#checksGrid input:checked')].map(cb => cb.value);
+    const topics  = checked.length ? checked.join(', ') : '';
+
+    if (!name || !phone || !email) {
+      alert('Пожалуйста, заполните поля: имя, телефон и email.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Введите корректный email.');
+      return;
+    }
+
+    // 1. CallMeBot (фоновое уведомление, если ключ настроен)
+    sendWhatsApp(name, phone, email, service, topics, message);
+
+    // 2. Открыть WhatsApp с готовым сообщением от клиента
+    const waText = encodeURIComponent(
+      '📋 Заявка с сайта saifarova.com\n\n' +
+      '👤 ' + name  + '\n' +
+      '📱 ' + phone + '\n' +
+      '📧 ' + email + '\n' +
+      (service ? '📌 ' + service + '\n' : '') +
+      (topics  ? '✅ ' + topics  + '\n' : '') +
+      (message ? '💬 ' + message        : '')
+    );
+    window.open('https://wa.me/' + WHATSAPP_PHONE + '?text=' + waText, '_blank');
+
+    // 3. Показать экран успеха
+    document.getElementById('leadForm').style.display = 'none';
+    const s = document.getElementById('formSuccess');
+    s.classList.add('show');
+    s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ── Инициализация ──
+  renderForm();
+</script>
+
+</body>
+</html>
