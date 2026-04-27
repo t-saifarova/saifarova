@@ -913,13 +913,10 @@
           </div>
           <div class="form-success" id="formSuccess">
             <div class="form-success-icon">✅</div>
-            <h3>Отлично!</h3>
-            <p>Открылся WhatsApp с вашей заявкой.<br>
-            Нажмите <strong>«Отправить»</strong> — и Татьяна<br>
-            свяжется с вами в течение 24 часов.</p>
+            <h3>Заявка отправлена!</h3>
+            <p>Татьяна свяжется с вами<br>в течение 24 часов.</p>
             <p style="margin-top:16px;font-size:14px;">
-              Если WhatsApp не открылся —<br>
-              напишите напрямую:
+              Или напишите напрямую в WhatsApp:
               <a href="https://wa.me/77014034396" target="_blank"
                  style="color:var(--orange);font-weight:700;text-decoration:none;">
                 +7 (701) 403-43-96
@@ -1172,19 +1169,22 @@
     // 1. CallMeBot (фоновое уведомление, если ключ настроен)
     sendWhatsApp(name, phone, email, service, topics, message);
 
-    // 2. Открыть WhatsApp с готовым сообщением от клиента
-    const waText = encodeURIComponent(
-      '📋 Заявка с сайта saifarova.com\n\n' +
-      '👤 ' + name  + '\n' +
-      '📱 ' + phone + '\n' +
-      '📧 ' + email + '\n' +
-      (service ? '📌 ' + service + '\n' : '') +
-      (topics  ? '✅ ' + topics  + '\n' : '') +
-      (message ? '💬 ' + message        : '')
-    );
-    window.open('https://wa.me/' + WHATSAPP_PHONE + '?text=' + waText, '_blank');
+    // 2. Отправить заявку на email через FormSubmit
+    fetch('https://formsubmit.co/ajax/t.saifarova@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '📋 Новая заявка с saifarova.com',
+        Имя: name,
+        Телефон: phone,
+        Email: email,
+        Услуга: service || '—',
+        Темы: topics || '—',
+        Сообщение: message || '—'
+      })
+    }).catch(() => {}); // тихо игнорируем ошибки сети
 
-    // 3. Показать экран успеха
+    // 3. Показать экран успеха сразу
     document.getElementById('leadForm').style.display = 'none';
     const s = document.getElementById('formSuccess');
     s.classList.add('show');
