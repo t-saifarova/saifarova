@@ -881,7 +881,7 @@
               </div>
               <div class="fg">
                 <label>Телефон *</label>
-                <input type="tel" id="fphone" placeholder="+7 (___) ___-__-__">
+                <input type="tel" id="fphone" placeholder="+7 (___) ___-__-__" maxlength="18">
               </div>
             </div>
             <div class="fg">
@@ -1161,6 +1161,10 @@
       alert('Пожалуйста, заполните поля: имя, телефон и email.');
       return;
     }
+    if (phone.replace(/\D/g, '').length < 11) {
+      alert('Введите полный номер телефона: +7 (XXX) XXX-XX-XX');
+      return;
+    }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       alert('Введите корректный email.');
       return;
@@ -1191,8 +1195,46 @@
     s.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  // ── Маска телефона +7 (XXX) XXX-XX-XX ──
+  function initPhoneMask() {
+    const input = document.getElementById('fphone');
+    if (!input) return;
+
+    function format(val) {
+      let d = val.replace(/\D/g, '');
+      if (!d.startsWith('7')) d = '7' + d;
+      d = d.substring(0, 11);
+      let r = '+7';
+      if (d.length > 1) r += ' (' + d.substring(1, 4);
+      if (d.length >= 4) r += ') ' + d.substring(4, 7);
+      if (d.length >= 7) r += '-' + d.substring(7, 9);
+      if (d.length >= 9) r += '-' + d.substring(9, 11);
+      return r;
+    }
+
+    input.addEventListener('focus', function() {
+      if (!this.value || !this.value.startsWith('+7')) this.value = '+7 ';
+    });
+
+    input.addEventListener('input', function() {
+      const pos = this.selectionStart;
+      const prev = this.value;
+      this.value = format(this.value);
+      // сохраняем позицию курсора
+      const diff = this.value.length - prev.length;
+      this.setSelectionRange(pos + diff, pos + diff);
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if ((e.key === 'Backspace' || e.key === 'Delete') && this.value.length <= 3) {
+        e.preventDefault();
+      }
+    });
+  }
+
   // ── Инициализация ──
   renderForm();
+  initPhoneMask();
 </script>
 
 </body>
