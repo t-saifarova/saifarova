@@ -502,6 +502,33 @@
     .fsoc:hover { background: var(--orange); color: white; }
     .footer-bottom { text-align: center; font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 28px; }
 
+    /* ── LEAD MAGNET ── */
+    #checklist { background: linear-gradient(135deg, #fff9f7 0%, #fff 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .lm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .lm-badge { display: inline-block; background: var(--orange-light); color: var(--orange); font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(255,92,53,0.2); }
+    .lm-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 36px); color: var(--dark); line-height: 1.2; margin-bottom: 16px; }
+    .lm-text p { font-size: 16px; color: var(--text-light); margin-bottom: 24px; }
+    .lm-preview { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .lm-preview li { font-size: 15px; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .lm-preview li::before { content: '✓'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+    .lm-form-card { background: white; border-radius: 20px; padding: 36px; box-shadow: 0 16px 56px rgba(22,22,42,0.1); border: 1px solid var(--border); }
+    .lm-form-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); margin-bottom: 24px; }
+    .lm-success { text-align: center; padding: 24px 0; }
+    .lm-success-icon { font-size: 52px; margin-bottom: 16px; }
+    .lm-success h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); margin-bottom: 8px; }
+    .lm-success p { color: var(--text-light); font-size: 15px; margin-bottom: 20px; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 780px; margin: 48px auto 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; background: none; border: none; padding: 22px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; text-align: left; font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 600; color: var(--dark); transition: color 0.2s; }
+    .faq-q:hover { color: var(--orange); }
+    .faq-arrow { font-size: 20px; color: var(--orange); flex-shrink: 0; transition: transform 0.3s; }
+    .faq-arrow.open { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-a.open { max-height: 300px; padding-bottom: 20px; }
+    .faq-a p { font-size: 15px; color: var(--text-light); line-height: 1.8; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
@@ -551,6 +578,7 @@
       <li><a href="#services">Услуги</a></li>
       <li><a href="#course">Курс</a></li>
       <li><a href="#cases">Кейсы</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#social">Блог</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:16px;">
@@ -743,10 +771,10 @@
         <a href="#contact" class="btn btn-primary">Записаться в лист ожидания →</a>
       </div>
       <div class="course-right">
-        <div class="course-coming">Скоро</div>
+        <div class="course-coming">Старт · Осень 2026</div>
         <div class="course-big">6</div>
         <div class="course-unit">модулей<br>полный цикл CX</div>
-        <a href="#contact" class="btn btn-ghost" style="width:100%;margin-bottom:12px;">Получить уведомление о старте</a>
+        <a href="#checklist" class="btn btn-ghost" style="width:100%;margin-bottom:12px;">Получить уведомление о старте</a>
       </div>
     </div>
   </div>
@@ -781,6 +809,45 @@
         <p class="ccase-desc">Разработка методологии реинжиниринга бизнес-процессов для госорганов. Внедрение человекоцентричного проектирования в архитектуру государственных цифровых сервисов.</p>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══ LEAD MAGNET ══ -->
+<section id="checklist" class="section">
+  <div class="container">
+    <div class="lm-grid">
+      <div class="lm-text reveal">
+        <div class="lm-badge">🎁 Бесплатно</div>
+        <h2>10 признаков, что ваш клиентский сервис теряет деньги</h2>
+        <p>Авторский чеклист Татьяны Сайфаровой — за 5 минут проверьте состояние вашего сервиса и узнайте, где скрыты потери.</p>
+        <ul class="lm-preview">
+          <li>10 ключевых точек диагностики</li>
+          <li>Конкретные зоны роста и потерь</li>
+          <li>Первые рекомендации к действию</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="lm-form-card">
+          <div id="lmFormWrap">
+            <h3>Получить чеклист бесплатно</h3>
+            <div class="fg" style="margin-bottom:14px;">
+              <input type="text" id="lmName" placeholder="Ваше имя">
+            </div>
+            <div class="fg" style="margin-bottom:20px;">
+              <input type="email" id="lmEmail" placeholder="Ваш email">
+            </div>
+            <button class="btn btn-primary" style="width:100%;" onclick="submitLead()">Получить чеклист →</button>
+            <p style="font-size:12px;color:var(--text-light);margin-top:12px;text-align:center;">Без спама. Только полезный материал.</p>
+          </div>
+          <div class="lm-success" id="lmSuccess" style="display:none;">
+            <div class="lm-success-icon">✅</div>
+            <h3>Чеклист готов!</h3>
+            <p>Нажмите кнопку ниже, чтобы открыть</p>
+            <a href="checklist.html" target="_blank" class="btn btn-primary">Открыть чеклист →</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -823,6 +890,79 @@
       &nbsp;·&nbsp;
       <a href="https://www.facebook.com/share/1KFdpJtT4v/" target="_blank" rel="noopener">Facebook</a>
     </p>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq" class="section" style="background:#f8f8fc;">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="label">FAQ</div>
+      <h2 class="title">Часто задаваемые<br>вопросы</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Как проходит стратегическая сессия 1:1?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          <p>Сессия проходит в формате глубинного интервью и диагностики вашей сервисной модели. Я задаю ключевые вопросы, анализирую узкие места и точки роста. По итогам вы получаете конкретные рекомендации и план действий. Формат: онлайн или офлайн, 2–3 часа.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Работаете ли вы онлайн или только офлайн?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          <p>Работаю в обоих форматах. Стратегические сессии и консалтинг — онлайн по всему миру. Корпоративные тренинги и интенсивы для команд — очно в Астане и других городах Казахстана, либо онлайн для распределённых команд.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Для каких компаний подходят ваши услуги?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          <p>Работаю с компаниями от 50 сотрудников: банки, телеком, ритейл, госструктуры, e-commerce, страховые и логистические компании. Если у вас есть клиентский отдел, контакт-центр или команда продаж — мои методологии применимы.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Сколько времени занимает проект трансформации?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          <p>Зависит от масштаба. Стратегическая сессия — один день. Интенсив для топ-команды — 1 месяц. Полный консалтинговый проект по трансформации клиентского сервиса — от 3 до 6 месяцев. Первые измеримые результаты, как правило, видны уже через 4–6 недель работы.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Как быстро ждать первых результатов?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          <p>После стратегической сессии вы уходите с готовым планом действий — результат есть уже в день встречи. В проектной работе первые измеримые изменения (снижение повторных обращений, рост NPS, сокращение времени обслуживания) фиксируются в течение 4–8 недель.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Как начать работу — с чего первый шаг?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          <p>Заполните форму ниже или напишите в WhatsApp. Я лично свяжусь с вами в течение 24 часов, задам несколько вопросов о вашей ситуации и предложу оптимальный формат работы. Первичная консультация — бесплатно.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -951,7 +1091,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      © 2025 Татьяна Сайфарова · Эксперт по клиентскому сервису · Астана, Казахстан
+      © 2026 Татьяна Сайфарова · Эксперт по клиентскому сервису · Астана, Казахстан
       &nbsp;·&nbsp;
       <a href="privacy.html" style="color:rgba(255,255,255,0.3);text-decoration:none;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Политика конфиденциальности</a>
     </div>
@@ -1193,6 +1333,43 @@
     const s = document.getElementById('formSuccess');
     s.classList.add('show');
     s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ── Лид-магнит ──
+  function submitLead() {
+    const name  = document.getElementById('lmName').value.trim();
+    const email = document.getElementById('lmEmail').value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Введите корректный email');
+      return;
+    }
+    fetch('https://formsubmit.co/ajax/t.saifarova@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '📥 Новый подписчик — скачал чеклист',
+        Имя: name || '—',
+        Email: email,
+        Источник: 'Чеклист на saifarova.com'
+      })
+    }).catch(() => {});
+    document.getElementById('lmFormWrap').style.display = 'none';
+    document.getElementById('lmSuccess').style.display = 'block';
+  }
+
+  // ── FAQ аккордеон ──
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const arrow  = btn.querySelector('.faq-arrow');
+    const isOpen = answer.classList.contains('open');
+    // закрыть все
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-arrow').forEach(a => a.classList.remove('open'));
+    // открыть нажатый (если был закрыт)
+    if (!isOpen) {
+      answer.classList.add('open');
+      arrow.classList.add('open');
+    }
   }
 
   // ── Маска телефона +7 (XXX) XXX-XX-XX ──
