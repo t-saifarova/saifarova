@@ -24,6 +24,55 @@
   <meta name="twitter:description" content="Превращаю клиентский сервис в источник роста бизнеса.">
   <meta name="twitter:image" content="images/photo-hero.jpg">
 
+  <!-- Schema.org структурированные данные -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Татьяна Сайфарова",
+    "jobTitle": "Эксперт по клиентскому сервису",
+    "description": "Консультант, тренер и соавтор методологии реинжиниринга. 15+ лет трансформации клиентских систем в Казахстане.",
+    "url": "https://saifarova.com",
+    "email": "t.saifarova@gmail.com",
+    "telephone": "+77014034396",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Астана",
+      "addressCountry": "KZ"
+    },
+    "sameAs": [
+      "https://www.instagram.com/tanyasaifarova",
+      "https://www.facebook.com/share/1KFdpJtT4v/"
+    ],
+    "knowsAbout": ["Клиентский сервис", "Customer Experience", "Design Thinking", "NPS", "Трансформация контакт-центров", "Реинжиниринг бизнес-процессов"],
+    "alumniOf": {
+      "@type": "Organization",
+      "name": "Stanford d.school"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Стратегическая сессия 1:1",
+        "description": "Диагностика сервисной модели и план действий"
+      },
+      {
+        "@type": "Offer",
+        "name": "Интенсив для топ-команды",
+        "description": "Разработка CX-стратегии с командой",
+        "price": "950000",
+        "priceCurrency": "KZT"
+      },
+      {
+        "@type": "Offer",
+        "name": "Корпоративный тренинг",
+        "description": "Системное обучение команды по авторской методологии",
+        "price": "1100000",
+        "priceCurrency": "KZT"
+      }
+    ]
+  }
+  </script>
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M1B4004V43"></script>
   <script>
@@ -502,6 +551,16 @@
     .fsoc:hover { background: var(--orange); color: white; }
     .footer-bottom { text-align: center; font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 28px; }
 
+    /* ── TRUST BAR ── */
+    .trust-bar { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .trust-label { font-size: 13px; font-weight: 600; color: var(--text-light); white-space: nowrap; margin-right: 8px; }
+    .trust-logo {
+      font-size: 12px; font-weight: 700; color: var(--light); letter-spacing: 0.3px;
+      padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
+      background: white; white-space: nowrap; transition: all 0.2s; text-transform: uppercase;
+    }
+    .trust-logo:hover { border-color: var(--orange); color: var(--dark); }
+
     /* ── LEAD MAGNET ── */
     #checklist { background: linear-gradient(135deg, #fff9f7 0%, #fff 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .lm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
@@ -641,6 +700,20 @@
     </div>
   </div>
 </section>
+
+<!-- ══ TRUST BAR ══ -->
+<div style="background:#f8f8fc; border-bottom:1px solid var(--border); padding:22px 0;">
+  <div class="container">
+    <div class="trust-bar">
+      <span class="trust-label">Нам доверяют:</span>
+      <div class="trust-logo">АО Казахтелеком</div>
+      <div class="trust-logo">АО Казпочта</div>
+      <div class="trust-logo">МЦРИАП РК</div>
+      <div class="trust-logo">Цифровое правительство РК</div>
+      <div class="trust-logo">50+ компаний</div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ ABOUT ══ -->
 <section id="about" class="section">
