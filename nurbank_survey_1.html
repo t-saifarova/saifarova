@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Опросник по Контакт-центру — Нурбанк</title>
+<title>Опросник: Диагностика Контакт-центра</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -98,7 +98,7 @@ textarea.free:focus{border-color:var(--accent);background:#fff}
 
 <div class="survey-hero">
   <div class="hero-inner">
-    <div class="hero-tag">Опросник · Нурбанк</div>
+    <div class="hero-tag">Опросник · Диагностика КЦ</div>
     <h1 class="hero-title">Диагностика<br><span>Контакт-центра</span></h1>
     <p class="hero-desc">Первичный опросник для обследования КЦ. Ваши ответы помогут провести точную диагностику и подготовить рекомендации по развитию Контакт-центра.</p>
     <div class="hero-meta">
@@ -312,9 +312,19 @@ textarea.free:focus{border-color:var(--accent);background:#fff}
 </div>
 
 <div id="success">
-  <div class="s-icon">✅</div>
-  <h2>Опросник отправлен!</h2>
-  <p>Спасибо за ваши ответы.<br>Татьяна Сайфарова свяжется с вами в ближайшее время с результатами диагностики.</p>
+  <div class="s-icon">🤝</div>
+  <h2>Спасибо за ваше время!</h2>
+  <p style="font-size:17px;font-weight:600;color:var(--dark);margin-bottom:16px;">
+    Клиентский сервис — это не статья расходов.<br>Это точка роста вашего бизнеса.
+  </p>
+  <p>
+    Вы уделили время важному — и это уже говорит о вашем подходе к делу.<br><br>
+    Я внимательно изучу каждый ответ и подготовлю для вас персональные рекомендации
+    по развитию Контакт-центра. <strong>Свяжусь с вами в течение 2 рабочих дней.</strong>
+  </p>
+  <div style="margin-top:32px;">
+    <a href="https://saifarova.com/" style="display:inline-block;background:var(--accent);color:#fff;text-decoration:none;border-radius:100px;padding:14px 36px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;">← Вернуться на сайт</a>
+  </div>
 </div>
 
 <footer class="site-footer">
@@ -381,7 +391,7 @@ function doSubmit(){
     46:'46. Дополнительный контекст',47:'47. Что уже пробовали',48:'48. Приоритеты изменений'
   };
 
-  let body = '📋 ОПРОСНИК ПО КОНТАКТ-ЦЕНТРУ — НУРБАНК\n';
+  let body = '📋 ДИАГНОСТИКА КОНТАКТ-ЦЕНТРА\n';
   body += '═'.repeat(50) + '\n\n';
   for(let i=1;i<=48;i++){
     const v = ans[i];
@@ -397,7 +407,7 @@ function doSubmit(){
     method: 'POST',
     headers: {'Content-Type':'application/json','Accept':'application/json'},
     body: JSON.stringify({
-      _subject: '📋 Опросник КЦ — Нурбанк ('+Object.keys(ans).length+' ответов)',
+      _subject: '📋 Диагностика КЦ — новый опросник ('+Object.keys(ans).length+' ответов)',
       _template: 'box',
       message: body
     })
