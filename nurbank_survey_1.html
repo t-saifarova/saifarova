@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Опросник по Контакт-центру — Нурбанк</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#FF5C35;--accent-light:#FFF0EC;--dark:#0F0F0F;--mid:#555;--light:#F7F6F3;--white:#fff;--border:#E8E5DE}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:var(--light);color:var(--dark);min-height:100vh}
+
+/* HEADER */
+.site-header{background:var(--dark);padding:18px 5%;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.5px}
+.logo span{color:var(--accent)}
+.header-badge{font-size:11px;color:rgba(255,255,255,0.45);font-weight:500;letter-spacing:0.5px}
+
+/* HERO */
+.survey-hero{background:linear-gradient(135deg,#0F0F0F 0%,#1a1a2e 100%);padding:52px 5% 44px;position:relative;overflow:hidden}
+.survey-hero::before{content:'КЦ';position:absolute;right:-20px;bottom:-40px;font-family:'Playfair Display',serif;font-size:200px;font-weight:900;color:rgba(255,255,255,0.03);pointer-events:none;line-height:1}
+.hero-inner{max-width:760px;margin:0 auto}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,53,0.15);border:1px solid rgba(255,92,53,0.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px}
+.hero-title span{color:var(--accent)}
+.hero-desc{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;max-width:580px;margin-bottom:28px}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap}
+.meta-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.5)}
+.meta-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* PROGRESS */
+.progress-sticky{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 5%}
+.progress-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.prog-label{font-size:12px;font-weight:600;color:var(--mid);white-space:nowrap}
+.prog-bar{flex:1;height:5px;background:#EAEAF0;border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),#FF8C00);border-radius:100px;transition:width 0.4s ease;width:0%}
+.prog-pct{font-size:12px;font-weight:700;color:var(--accent);min-width:36px;text-align:right}
+
+/* FORM */
+.form-wrap{max-width:760px;margin:0 auto;padding:32px 5% 80px}
+
+.block-header{display:flex;align-items:center;gap:12px;margin:36px 0 16px}
+.block-num{width:32px;height:32px;border-radius:10px;background:var(--dark);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.block-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
+
+.q-card{background:var(--white);border-radius:16px;padding:22px 24px;margin-bottom:12px;border:1.5px solid var(--border);transition:border-color 0.2s,box-shadow 0.2s}
+.q-card:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,92,53,0.08)}
+.q-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+.q-badge{min-width:26px;height:26px;border-radius:7px;background:var(--accent-light);color:var(--accent);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.q-body{}
+.q-text{font-size:14px;font-weight:600;line-height:1.5;color:var(--dark);margin-bottom:3px}
+.q-hint{font-size:11px;color:#aaa;font-weight:400}
+.opts{display:flex;flex-direction:column;gap:7px;padding-left:38px}
+.opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border-radius:9px;border:1.5px solid var(--border);cursor:pointer;transition:all 0.15s;font-size:13px;color:#333;user-select:none}
+.opt:hover{border-color:var(--accent);background:var(--accent-light)}
+.opt.on{border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:600}
+.opt input{accent-color:var(--accent);width:14px;height:14px;flex-shrink:0;cursor:pointer}
+textarea.free{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;font-family:'Manrope',sans-serif;resize:vertical;min-height:88px;outline:none;color:var(--dark);transition:border-color 0.2s;background:var(--light)}
+textarea.free:focus{border-color:var(--accent);background:#fff}
+.max-note{font-size:11px;color:#bbb;margin-top:6px;padding-left:38px}
+
+/* SUBMIT */
+.submit-box{background:var(--dark);border-radius:20px;padding:36px 32px;margin-top:28px;text-align:center;position:relative;overflow:hidden}
+.submit-box::before{content:'→';position:absolute;right:20px;bottom:-20px;font-size:120px;color:rgba(255,255,255,0.03);font-weight:900}
+.submit-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:8px}
+.submit-box p{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:24px;line-height:1.6}
+.submit-btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:100px;padding:15px 48px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.25s}
+.submit-btn:hover{background:#e04a24;transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,92,53,0.4)}
+.submit-note{font-size:11px;color:rgba(255,255,255,0.3);margin-top:12px}
+
+/* SUCCESS */
+#success{display:none;text-align:center;padding:80px 24px}
+#success .s-icon{font-size:64px;margin-bottom:24px}
+#success h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--dark);margin-bottom:12px}
+#success p{font-size:15px;color:var(--mid);line-height:1.7;max-width:480px;margin:0 auto}
+
+/* FOOTER */
+.site-footer{background:var(--dark);padding:24px 5%;text-align:center;border-top:1px solid rgba(255,255,255,0.06)}
+.site-footer p{font-size:12px;color:rgba(255,255,255,0.3)}
+.site-footer span{color:var(--accent)}
+
+@media(max-width:600px){
+  .survey-hero{padding:40px 4% 36px}
+  .form-wrap{padding:24px 4% 60px}
+  .hero-meta{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://saifarova.com/" class="logo" style="text-decoration:none;">Сайфарова<span>.</span></a>
+  <div class="header-badge">GROW CONSULT · Диагностика КЦ</div>
+</header>
+
+<div class="survey-hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Опросник · Нурбанк</div>
+    <h1 class="hero-title">Диагностика<br><span>Контакт-центра</span></h1>
+    <p class="hero-desc">Первичный опросник для обследования КЦ. Ваши ответы помогут провести точную диагностику и подготовить рекомендации по развитию Контакт-центра.</p>
+    <div class="hero-meta">
+      <div class="meta-item"><div class="meta-dot"></div>48 вопросов</div>
+      <div class="meta-item"><div class="meta-dot"></div>~15–20 минут</div>
+      <div class="meta-item"><div class="meta-dot"></div>Татьяна Сайфарова, GROW CONSULT</div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-sticky">
+  <div class="progress-inner">
+    <span class="prog-label">Прогресс</span>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+    <span class="prog-pct" id="prog-pct">0%</span>
+  </div>
+</div>
+
+<div class="form-wrap" id="form-section">
+
+<!-- БЛОК 1 -->
+<div class="block-header"><div class="block-num">1</div><div class="block-label">Клиентская стратегия и место КЦ</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">1</div><div class="q-body"><div class="q-text">Есть ли в банке утверждённая клиентская стратегия или стратегия клиентского обслуживания?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="1" data-type="single"><label class="opt"><input type="radio" name="q1" value="Да, утверждена и действует">Да, утверждена и действует</label><label class="opt"><input type="radio" name="q1" value="Есть отдельные элементы, но единой стратегии нет">Есть отдельные элементы, но единой стратегии нет</label><label class="opt"><input type="radio" name="q1" value="Находится в разработке">Находится в разработке</label><label class="opt"><input type="radio" name="q1" value="Нет">Нет</label><label class="opt"><input type="radio" name="q1" value="Затрудняюсь ответить">Затрудняюсь ответить</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">2</div><div class="q-body"><div class="q-text">Если стратегия есть, какую роль в ней играет Контакт-центр?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="2" data-type="single"><label class="opt"><input type="radio" name="q2" value="Ключевой канал клиентского взаимодействия">Ключевой канал клиентского взаимодействия</label><label class="opt"><input type="radio" name="q2" value="Один из нескольких каналов обслуживания">Один из нескольких каналов обслуживания</label><label class="opt"><input type="radio" name="q2" value="Только операционная функция">Только операционная функция</label><label class="opt"><input type="radio" name="q2" value="Только информационная поддержка">Только информационная поддержка</label><label class="opt"><input type="radio" name="q2" value="Роль не формализована">Роль не формализована</label><label class="opt"><input type="radio" name="q2" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">3</div><div class="q-body"><div class="q-text">Есть ли в банке отдельная структура / функция клиентского сервиса?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="3" data-type="single"><label class="opt"><input type="radio" name="q3" value="Да, отдельное подразделение">Да, отдельное подразделение</label><label class="opt"><input type="radio" name="q3" value="Да, отдельная функция без самостоятельного подразделения">Да, отдельная функция без самостоятельного подразделения</label><label class="opt"><input type="radio" name="q3" value="Функция распределена между несколькими подразделениями">Функция распределена между несколькими подразделениями</label><label class="opt"><input type="radio" name="q3" value="Нет">Нет</label><label class="opt"><input type="radio" name="q3" value="Затрудняюсь ответить">Затрудняюсь ответить</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">4</div><div class="q-body"><div class="q-text">Кто курирует Контакт-центр на уровне банка?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="4" data-type="single"><label class="opt"><input type="radio" name="q4" value="Отдельный руководитель Контакт-центра">Отдельный руководитель Контакт-центра</label><label class="opt"><input type="radio" name="q4" value="Блок клиентского сервиса">Блок клиентского сервиса</label><label class="opt"><input type="radio" name="q4" value="Розничный бизнес">Розничный бизнес</label><label class="opt"><input type="radio" name="q4" value="Операционный блок">Операционный блок</label><label class="opt"><input type="radio" name="q4" value="Цифровой блок / digital">Цифровой блок / digital</label><label class="opt"><input type="radio" name="q4" value="Маркетинг">Маркетинг</label><label class="opt"><input type="radio" name="q4" value="Несколько подразделений одновременно">Несколько подразделений одновременно</label><label class="opt"><input type="radio" name="q4" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">5</div><div class="q-body"><div class="q-text">Насколько чётко определён владелец функции Контакт-центра?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="5" data-type="single"><label class="opt"><input type="radio" name="q5" value="Чётко определён">Чётко определён</label><label class="opt"><input type="radio" name="q5" value="Определён частично">Определён частично</label><label class="opt"><input type="radio" name="q5" value="Ответственность размыта">Ответственность размыта</label><label class="opt"><input type="radio" name="q5" value="Формально есть, по факту нет">Формально есть, по факту нет</label><label class="opt"><input type="radio" name="q5" value="Затрудняюсь ответить">Затрудняюсь ответить</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">6</div><div class="q-body"><div class="q-text">Есть ли у Контакт-центра утверждённая целевая модель развития?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="6" data-type="single"><label class="opt"><input type="radio" name="q6" value="Да">Да</label><label class="opt"><input type="radio" name="q6" value="Частично">Частично</label><label class="opt"><input type="radio" name="q6" value="Нет">Нет</label><label class="opt"><input type="radio" name="q6" value="В разработке">В разработке</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">7</div><div class="q-body"><div class="q-text">Как сегодня банк воспринимает Контакт-центр?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="7" data-type="single"><label class="opt"><input type="radio" name="q7" value="Как стратегический канал обслуживания">Как стратегический канал обслуживания</label><label class="opt"><input type="radio" name="q7" value="Как сервисное подразделение">Как сервисное подразделение</label><label class="opt"><input type="radio" name="q7" value="Как операционный центр обработки обращений">Как операционный центр обработки обращений</label><label class="opt"><input type="radio" name="q7" value="Как канал продаж">Как канал продаж</label><label class="opt"><input type="radio" name="q7" value="Как вспомогательную функцию">Как вспомогательную функцию</label><label class="opt"><input type="radio" name="q7" value="Как обязательную функцию без выраженной бизнес-ценности">Как обязательную функцию без выраженной бизнес-ценности</label><label class="opt"><input type="radio" name="q7" value="Другое">Другое</label></div></div>
+
+<!-- БЛОК 2 -->
+<div class="block-header"><div class="block-num">2</div><div class="block-label">Роль КЦ в бизнесе банка</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">8</div><div class="q-body"><div class="q-text">Какие основные функции выполняет Контакт-центр сегодня?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="8" data-type="multi"><label class="opt"><input type="checkbox" name="q8" value="Информационно-справочная поддержка">Информационно-справочная поддержка</label><label class="opt"><input type="checkbox" name="q8" value="Решение клиентских вопросов">Решение клиентских вопросов</label><label class="opt"><input type="checkbox" name="q8" value="Поддержка продуктов и услуг банка">Поддержка продуктов и услуг банка</label><label class="opt"><input type="checkbox" name="q8" value="Поддержка цифровых сервисов">Поддержка цифровых сервисов</label><label class="opt"><input type="checkbox" name="q8" value="Продажи">Продажи</label><label class="opt"><input type="checkbox" name="q8" value="Кросс-продажи / допродажи">Кросс-продажи / допродажи</label><label class="opt"><input type="checkbox" name="q8" value="Удержание клиентов">Удержание клиентов</label><label class="opt"><input type="checkbox" name="q8" value="Обработка жалоб">Обработка жалоб</label><label class="opt"><input type="checkbox" name="q8" value="Обратная связь от клиентов">Обратная связь от клиентов</label><label class="opt"><input type="checkbox" name="q8" value="Маршрутизация обращений в другие подразделения">Маршрутизация обращений в другие подразделения</label><label class="opt"><input type="checkbox" name="q8" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">9</div><div class="q-body"><div class="q-text">Насколько Контакт-центр влияет на клиентский опыт банка?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="9" data-type="single"><label class="opt"><input type="radio" name="q9" value="Влияет критично">Влияет критично</label><label class="opt"><input type="radio" name="q9" value="Влияет существенно">Влияет существенно</label><label class="opt"><input type="radio" name="q9" value="Влияет частично">Влияет частично</label><label class="opt"><input type="radio" name="q9" value="Влияние минимально">Влияние минимально</label><label class="opt"><input type="radio" name="q9" value="Не оценивается">Не оценивается</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">10</div><div class="q-body"><div class="q-text">Насколько Контакт-центр влияет на бизнес-результат банка?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="10" data-type="single"><label class="opt"><input type="radio" name="q10" value="Влияет критично">Влияет критично</label><label class="opt"><input type="radio" name="q10" value="Влияет существенно">Влияет существенно</label><label class="opt"><input type="radio" name="q10" value="Влияет частично">Влияет частично</label><label class="opt"><input type="radio" name="q10" value="Влияние минимально">Влияние минимально</label><label class="opt"><input type="radio" name="q10" value="Не оценивается">Не оценивается</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">11</div><div class="q-body"><div class="q-text">Какие результаты банка напрямую зависят от работы КЦ?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="11" data-type="multi"><label class="opt"><input type="checkbox" name="q11" value="Удовлетворённость клиентов">Удовлетворённость клиентов</label><label class="opt"><input type="checkbox" name="q11" value="Лояльность клиентов">Лояльность клиентов</label><label class="opt"><input type="checkbox" name="q11" value="Скорость решения вопросов">Скорость решения вопросов</label><label class="opt"><input type="checkbox" name="q11" value="Репутация банка">Репутация банка</label><label class="opt"><input type="checkbox" name="q11" value="Продажи">Продажи</label><label class="opt"><input type="checkbox" name="q11" value="Удержание клиентов">Удержание клиентов</label><label class="opt"><input type="checkbox" name="q11" value="Снижение нагрузки на отделения">Снижение нагрузки на отделения</label><label class="opt"><input type="checkbox" name="q11" value="Снижение нагрузки на другие подразделения">Снижение нагрузки на другие подразделения</label><label class="opt"><input type="checkbox" name="q11" value="Поддержка цифровых каналов">Поддержка цифровых каналов</label><label class="opt"><input type="checkbox" name="q11" value="Не определено">Не определено</label><label class="opt"><input type="checkbox" name="q11" value="Другое">Другое</label></div></div>
+
+<!-- БЛОК 3 -->
+<div class="block-header"><div class="block-num">3</div><div class="block-label">Организация и управление КЦ</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">12</div><div class="q-body"><div class="q-text">Есть ли в КЦ выделенная управленческая структура?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="12" data-type="single"><label class="opt"><input type="radio" name="q12" value="Да, полностью">Да, полностью</label><label class="opt"><input type="radio" name="q12" value="Частично">Частично</label><label class="opt"><input type="radio" name="q12" value="Нет">Нет</label><label class="opt"><input type="radio" name="q12" value="Затрудняюсь ответить">Затрудняюсь ответить</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">13</div><div class="q-body"><div class="q-text">Какие роли выделены в КЦ?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="13" data-type="multi"><label class="opt"><input type="checkbox" name="q13" value="Операторы">Операторы</label><label class="opt"><input type="checkbox" name="q13" value="Супервизоры">Супервизоры</label><label class="opt"><input type="checkbox" name="q13" value="Руководители групп">Руководители групп</label><label class="opt"><input type="checkbox" name="q13" value="Руководитель КЦ">Руководитель КЦ</label><label class="opt"><input type="checkbox" name="q13" value="Контроль качества">Контроль качества</label><label class="opt"><input type="checkbox" name="q13" value="Обучение / тренеры">Обучение / тренеры</label><label class="opt"><input type="checkbox" name="q13" value="Аналитика / отчётность">Аналитика / отчётность</label><label class="opt"><input type="checkbox" name="q13" value="WFM / планирование нагрузки">WFM / планирование нагрузки</label><label class="opt"><input type="checkbox" name="q13" value="Back-office / поддержка">Back-office / поддержка</label><label class="opt"><input type="checkbox" name="q13" value="Отдельных ролей нет">Отдельных ролей нет</label><label class="opt"><input type="checkbox" name="q13" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">14</div><div class="q-body"><div class="q-text">Как организовано управление клиентским сервисом в части КЦ?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="14" data-type="single"><label class="opt"><input type="radio" name="q14" value="Есть единый центр принятия решений">Есть единый центр принятия решений</label><label class="opt"><input type="radio" name="q14" value="Решения принимаются в рамках КЦ">Решения принимаются в рамках КЦ</label><label class="opt"><input type="radio" name="q14" value="Решения принимаются в другом подразделении">Решения принимаются в другом подразделении</label><label class="opt"><input type="radio" name="q14" value="Управление распределено между несколькими функциями">Управление распределено между несколькими функциями</label><label class="opt"><input type="radio" name="q14" value="Система управления неформализована">Система управления неформализована</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">15</div><div class="q-body"><div class="q-text">Насколько текущая организационная модель КЦ эффективна?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="15" data-type="single"><label class="opt"><input type="radio" name="q15" value="Полностью эффективна">Полностью эффективна</label><label class="opt"><input type="radio" name="q15" value="Скорее эффективна">Скорее эффективна</label><label class="opt"><input type="radio" name="q15" value="Частично эффективна">Частично эффективна</label><label class="opt"><input type="radio" name="q15" value="Скорее неэффективна">Скорее неэффективна</label><label class="opt"><input type="radio" name="q15" value="Неэффективна">Неэффективна</label><label class="opt"><input type="radio" name="q15" value="Требует пересмотра">Требует пересмотра</label></div></div>
+
+<!-- БЛОК 4 -->
+<div class="block-header"><div class="block-num">4</div><div class="block-label">Каналы и нагрузка</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">16</div><div class="q-body"><div class="q-text">Какие каналы обслуживает Контакт-центр?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="16" data-type="multi"><label class="opt"><input type="checkbox" name="q16" value="Входящие звонки">Входящие звонки</label><label class="opt"><input type="checkbox" name="q16" value="Исходящие звонки">Исходящие звонки</label><label class="opt"><input type="checkbox" name="q16" value="Email">Email</label><label class="opt"><input type="checkbox" name="q16" value="Онлайн-чат">Онлайн-чат</label><label class="opt"><input type="checkbox" name="q16" value="WhatsApp / Telegram">WhatsApp / Telegram</label><label class="opt"><input type="checkbox" name="q16" value="Социальные сети">Социальные сети</label><label class="opt"><input type="checkbox" name="q16" value="Мобильное приложение">Мобильное приложение</label><label class="opt"><input type="checkbox" name="q16" value="Внутренние обращения">Внутренние обращения</label><label class="opt"><input type="checkbox" name="q16" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">17</div><div class="q-body"><div class="q-text">Какой канал является основным по объёму обращений?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="17" data-type="single"><label class="opt"><input type="radio" name="q17" value="Входящие звонки">Входящие звонки</label><label class="opt"><input type="radio" name="q17" value="Исходящие звонки">Исходящие звонки</label><label class="opt"><input type="radio" name="q17" value="Чаты / мессенджеры">Чаты / мессенджеры</label><label class="opt"><input type="radio" name="q17" value="Email">Email</label><label class="opt"><input type="radio" name="q17" value="Обращения из мобильного приложения">Обращения из мобильного приложения</label><label class="opt"><input type="radio" name="q17" value="Не ведётся аналитика">Не ведётся аналитика</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">18</div><div class="q-body"><div class="q-text">Есть ли у банка аналитика по объёму и структуре обращений?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="18" data-type="single"><label class="opt"><input type="radio" name="q18" value="Да, по всем основным каналам">Да, по всем основным каналам</label><label class="opt"><input type="radio" name="q18" value="Да, частично">Да, частично</label><label class="opt"><input type="radio" name="q18" value="Только по звонкам">Только по звонкам</label><label class="opt"><input type="radio" name="q18" value="Нет">Нет</label><label class="opt"><input type="radio" name="q18" value="В разработке">В разработке</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">19</div><div class="q-body"><div class="q-text">Как вы оцениваете текущую нагрузку на Контакт-центр?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="19" data-type="single"><label class="opt"><input type="radio" name="q19" value="Низкая">Низкая</label><label class="opt"><input type="radio" name="q19" value="Средняя">Средняя</label><label class="opt"><input type="radio" name="q19" value="Высокая">Высокая</label><label class="opt"><input type="radio" name="q19" value="Очень высокая">Очень высокая</label><label class="opt"><input type="radio" name="q19" value="Не оценивается">Не оценивается</label></div></div>
+
+<!-- БЛОК 5 -->
+<div class="block-header"><div class="block-num">5</div><div class="block-label">Потери клиентов и риски</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">20</div><div class="q-body"><div class="q-text">На каких этапах клиент чаще всего теряется или получает негативный опыт?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="20" data-type="multi"><label class="opt"><input type="checkbox" name="q20" value="Не дозвонился">Не дозвонился</label><label class="opt"><input type="checkbox" name="q20" value="Долгое ожидание ответа">Долгое ожидание ответа</label><label class="opt"><input type="checkbox" name="q20" value="Не получил решение с первого обращения">Не получил решение с первого обращения</label><label class="opt"><input type="checkbox" name="q20" value="Был переведён между сотрудниками / подразделениями">Был переведён между сотрудниками / подразделениями</label><label class="opt"><input type="checkbox" name="q20" value="Не получил обещанную обратную связь">Не получил обещанную обратную связь</label><label class="opt"><input type="checkbox" name="q20" value="Получил неполную консультацию">Получил неполную консультацию</label><label class="opt"><input type="checkbox" name="q20" value="Получил некорректную консультацию">Получил некорректную консультацию</label><label class="opt"><input type="checkbox" name="q20" value="Слишком долго решается вопрос">Слишком долго решается вопрос</label><label class="opt"><input type="checkbox" name="q20" value="Такие точки не выделены">Такие точки не выделены</label><label class="opt"><input type="checkbox" name="q20" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">21</div><div class="q-body"><div class="q-text">Есть ли в КЦ повторные обращения по одним и тем же вопросам?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="21" data-type="single"><label class="opt"><input type="radio" name="q21" value="Да, в значительном объёме">Да, в значительном объёме</label><label class="opt"><input type="radio" name="q21" value="Да, в умеренном объёме">Да, в умеренном объёме</label><label class="opt"><input type="radio" name="q21" value="Есть, но не критично">Есть, но не критично</label><label class="opt"><input type="radio" name="q21" value="Нет">Нет</label><label class="opt"><input type="radio" name="q21" value="Не измеряется">Не измеряется</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">22</div><div class="q-body"><div class="q-text">Какие основные причины потерь клиентов или снижения качества обслуживания вы видите?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="22" data-type="multi"><label class="opt"><input type="checkbox" name="q22" value="Низкая скорость ответа">Низкая скорость ответа</label><label class="opt"><input type="checkbox" name="q22" value="Недостаточное качество консультации">Недостаточное качество консультации</label><label class="opt"><input type="checkbox" name="q22" value="Низкий уровень решения вопроса на первой линии">Низкий уровень решения вопроса на первой линии</label><label class="opt"><input type="checkbox" name="q22" value="Разрывы между КЦ и другими подразделениями">Разрывы между КЦ и другими подразделениями</label><label class="opt"><input type="checkbox" name="q22" value="Недостаточная квалификация сотрудников">Недостаточная квалификация сотрудников</label><label class="opt"><input type="checkbox" name="q22" value="Слабая система контроля качества">Слабая система контроля качества</label><label class="opt"><input type="checkbox" name="q22" value="Недостаток аналитики">Недостаток аналитики</label><label class="opt"><input type="checkbox" name="q22" value="Недостаток автоматизации">Недостаток автоматизации</label><label class="opt"><input type="checkbox" name="q22" value="Отсутствие единой клиентской логики">Отсутствие единой клиентской логики</label><label class="opt"><input type="checkbox" name="q22" value="Не анализировалось">Не анализировалось</label><label class="opt"><input type="checkbox" name="q22" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">23</div><div class="q-body"><div class="q-text">Есть ли понимание, как работа КЦ влияет на отток клиентов?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="23" data-type="single"><label class="opt"><input type="radio" name="q23" value="Да, есть подтверждённые данные">Да, есть подтверждённые данные</label><label class="opt"><input type="radio" name="q23" value="Есть косвенное понимание">Есть косвенное понимание</label><label class="opt"><input type="radio" name="q23" value="Предполагаем, но не считали">Предполагаем, но не считали</label><label class="opt"><input type="radio" name="q23" value="Нет, не анализировали">Нет, не анализировали</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">24</div><div class="q-body"><div class="q-text">Какие риски возникают, если Контакт-центром системно не заниматься?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="24" data-type="multi"><label class="opt"><input type="checkbox" name="q24" value="Рост оттока клиентов">Рост оттока клиентов</label><label class="opt"><input type="checkbox" name="q24" value="Рост жалоб">Рост жалоб</label><label class="opt"><input type="checkbox" name="q24" value="Потеря лояльности">Потеря лояльности</label><label class="opt"><input type="checkbox" name="q24" value="Потеря продаж">Потеря продаж</label><label class="opt"><input type="checkbox" name="q24" value="Рост повторных обращений">Рост повторных обращений</label><label class="opt"><input type="checkbox" name="q24" value="Рост нагрузки на отделения">Рост нагрузки на отделения</label><label class="opt"><input type="checkbox" name="q24" value="Репутационные риски">Репутационные риски</label><label class="opt"><input type="checkbox" name="q24" value="Операционные сбои">Операционные сбои</label><label class="opt"><input type="checkbox" name="q24" value="Пока не оценивалось">Пока не оценивалось</label></div></div>
+
+<!-- БЛОК 6 -->
+<div class="block-header"><div class="block-num">6</div><div class="block-label">KPI / KPA и система управления</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">25</div><div class="q-body"><div class="q-text">Есть ли в КЦ утверждённые KPI / KPA?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="25" data-type="single"><label class="opt"><input type="radio" name="q25" value="Да">Да</label><label class="opt"><input type="radio" name="q25" value="Частично">Частично</label><label class="opt"><input type="radio" name="q25" value="Нет">Нет</label><label class="opt"><input type="radio" name="q25" value="В разработке">В разработке</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">26</div><div class="q-body"><div class="q-text">Какие показатели используются для оценки работы КЦ?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="26" data-type="multi"><label class="opt"><input type="checkbox" name="q26" value="SLA / Service Level">SLA / Service Level</label><label class="opt"><input type="checkbox" name="q26" value="Среднее время ожидания">Среднее время ожидания</label><label class="opt"><input type="checkbox" name="q26" value="AHT">AHT</label><label class="opt"><input type="checkbox" name="q26" value="FCR">FCR</label><label class="opt"><input type="checkbox" name="q26" value="Abandon Rate">Abandon Rate</label><label class="opt"><input type="checkbox" name="q26" value="Доля повторных обращений">Доля повторных обращений</label><label class="opt"><input type="checkbox" name="q26" value="Качество обслуживания">Качество обслуживания</label><label class="opt"><input type="checkbox" name="q26" value="CSAT">CSAT</label><label class="opt"><input type="checkbox" name="q26" value="NPS">NPS</label><label class="opt"><input type="checkbox" name="q26" value="Продажи / конверсия">Продажи / конверсия</label><label class="opt"><input type="checkbox" name="q26" value="Выполнение плана">Выполнение плана</label><label class="opt"><input type="checkbox" name="q26" value="Удержание клиентов">Удержание клиентов</label><label class="opt"><input type="checkbox" name="q26" value="Не используются формализованные показатели">Не используются формализованные показатели</label><label class="opt"><input type="checkbox" name="q26" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">27</div><div class="q-body"><div class="q-text">Какие показатели реально используются для управления и принятия решений?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="27" data-type="multi"><label class="opt"><input type="checkbox" name="q27" value="Операционные">Операционные</label><label class="opt"><input type="checkbox" name="q27" value="Клиентские">Клиентские</label><label class="opt"><input type="checkbox" name="q27" value="Показатели качества">Показатели качества</label><label class="opt"><input type="checkbox" name="q27" value="Показатели продаж">Показатели продаж</label><label class="opt"><input type="checkbox" name="q27" value="Показатели удержания">Показатели удержания</label><label class="opt"><input type="checkbox" name="q27" value="Используются формально, но управленчески не применяются">Используются формально, но управленчески не применяются</label><label class="opt"><input type="checkbox" name="q27" value="Затрудняюсь ответить">Затрудняюсь ответить</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">28</div><div class="q-body"><div class="q-text">Есть ли показатели, которых не хватает для полноценного управления КЦ?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="28" data-type="single"><label class="opt"><input type="radio" name="q28" value="Да">Да</label><label class="opt"><input type="radio" name="q28" value="Нет">Нет</label><label class="opt"><input type="radio" name="q28" value="Не определяли">Не определяли</label></div></div>
+
+<!-- БЛОК 7 -->
+<div class="block-header"><div class="block-num">7</div><div class="block-label">Качество обслуживания и клиентский опыт</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">29</div><div class="q-body"><div class="q-text">Как контролируется качество работы сотрудников КЦ?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="29" data-type="multi"><label class="opt"><input type="checkbox" name="q29" value="Прослушивание звонков">Прослушивание звонков</label><label class="opt"><input type="checkbox" name="q29" value="Проверка переписок / чатов">Проверка переписок / чатов</label><label class="opt"><input type="checkbox" name="q29" value="Чек-листы качества">Чек-листы качества</label><label class="opt"><input type="checkbox" name="q29" value="Контроль руководителем">Контроль руководителем</label><label class="opt"><input type="checkbox" name="q29" value="Автоматизированный контроль">Автоматизированный контроль</label><label class="opt"><input type="checkbox" name="q29" value="Контроль не систематизирован">Контроль не систематизирован</label><label class="opt"><input type="checkbox" name="q29" value="Практически не контролируется">Практически не контролируется</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">30</div><div class="q-body"><div class="q-text">Есть ли в банке стандарты клиентского обслуживания, применимые к КЦ?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="30" data-type="single"><label class="opt"><input type="radio" name="q30" value="Да, утверждены и применяются">Да, утверждены и применяются</label><label class="opt"><input type="radio" name="q30" value="Есть частично">Есть частично</label><label class="opt"><input type="radio" name="q30" value="Есть, но применяются не всегда">Есть, но применяются не всегда</label><label class="opt"><input type="radio" name="q30" value="Нет">Нет</label><label class="opt"><input type="radio" name="q30" value="Затрудняюсь ответить">Затрудняюсь ответить</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">31</div><div class="q-body"><div class="q-text">Есть ли связь между качеством работы КЦ и повторными обращениями / жалобами клиентов?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="31" data-type="single"><label class="opt"><input type="radio" name="q31" value="Да, явно прослеживается">Да, явно прослеживается</label><label class="opt"><input type="radio" name="q31" value="Частично">Частично</label><label class="opt"><input type="radio" name="q31" value="Скорее нет">Скорее нет</label><label class="opt"><input type="radio" name="q31" value="Не анализируется">Не анализируется</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">32</div><div class="q-body"><div class="q-text">Какие типовые проблемы качества наблюдаются чаще всего?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="32" data-type="multi"><label class="opt"><input type="checkbox" name="q32" value="Формальный подход к клиенту">Формальный подход к клиенту</label><label class="opt"><input type="checkbox" name="q32" value="Неполные консультации">Неполные консультации</label><label class="opt"><input type="checkbox" name="q32" value="Ошибки в ответах">Ошибки в ответах</label><label class="opt"><input type="checkbox" name="q32" value="Недостаточное владение продуктом">Недостаточное владение продуктом</label><label class="opt"><input type="checkbox" name="q32" value="Низкая эмпатия">Низкая эмпатия</label><label class="opt"><input type="checkbox" name="q32" value="Нарушение стандартов общения">Нарушение стандартов общения</label><label class="opt"><input type="checkbox" name="q32" value="Слабая отработка сложных кейсов">Слабая отработка сложных кейсов</label><label class="opt"><input type="checkbox" name="q32" value="Проблемы не фиксируются">Проблемы не фиксируются</label><label class="opt"><input type="checkbox" name="q32" value="Другое">Другое</label></div></div>
+
+<!-- БЛОК 8 -->
+<div class="block-header"><div class="block-num">8</div><div class="block-label">Продажи, удержание и ценность КЦ</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">33</div><div class="q-body"><div class="q-text">Выполняет ли КЦ функции продаж или удержания?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="33" data-type="single"><label class="opt"><input type="radio" name="q33" value="Да, продажи">Да, продажи</label><label class="opt"><input type="radio" name="q33" value="Да, удержание">Да, удержание</label><label class="opt"><input type="radio" name="q33" value="Да, и продажи, и удержание">Да, и продажи, и удержание</label><label class="opt"><input type="radio" name="q33" value="Нет, только сервис">Нет, только сервис</label><label class="opt"><input type="radio" name="q33" value="Частично">Частично</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">34</div><div class="q-body"><div class="q-text">Оценивается ли вклад КЦ в продажи, удержание или выручку?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="34" data-type="single"><label class="opt"><input type="radio" name="q34" value="Да, в полном объёме">Да, в полном объёме</label><label class="opt"><input type="radio" name="q34" value="Да, частично">Да, частично</label><label class="opt"><input type="radio" name="q34" value="Только по отдельным кампаниям">Только по отдельным кампаниям</label><label class="opt"><input type="radio" name="q34" value="Не оценивается">Не оценивается</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">35</div><div class="q-body"><div class="q-text">В чём заключается основная ценность КЦ для банка?</div><div class="q-hint">Множественный выбор — до 3 вариантов</div></div></div>
+<div class="opts" data-q="35" data-type="multi" data-max="3"><label class="opt"><input type="checkbox" name="q35" value="Быстрое решение вопросов клиента">Быстрое решение вопросов клиента</label><label class="opt"><input type="checkbox" name="q35" value="Поддержание лояльности">Поддержание лояльности</label><label class="opt"><input type="checkbox" name="q35" value="Удержание клиентов">Удержание клиентов</label><label class="opt"><input type="checkbox" name="q35" value="Продажи и кросс-продажи">Продажи и кросс-продажи</label><label class="opt"><input type="checkbox" name="q35" value="Снижение нагрузки на отделения">Снижение нагрузки на отделения</label><label class="opt"><input type="checkbox" name="q35" value="Поддержка цифровых каналов">Поддержка цифровых каналов</label><label class="opt"><input type="checkbox" name="q35" value="Канал обратной связи от клиента">Канал обратной связи от клиента</label><label class="opt"><input type="checkbox" name="q35" value="Управление клиентским опытом">Управление клиентским опытом</label><label class="opt"><input type="checkbox" name="q35" value="Ценность пока не формализована">Ценность пока не формализована</label></div>
+<div class="max-note" id="lim35">Выбрано: 0 из 3</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">36</div><div class="q-body"><div class="q-text">Какие потери для бизнеса возможны при слабой работе КЦ?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="36" data-type="multi"><label class="opt"><input type="checkbox" name="q36" value="Потеря клиентов">Потеря клиентов</label><label class="opt"><input type="checkbox" name="q36" value="Потеря продаж">Потеря продаж</label><label class="opt"><input type="checkbox" name="q36" value="Увеличение жалоб">Увеличение жалоб</label><label class="opt"><input type="checkbox" name="q36" value="Рост нагрузки на другие подразделения">Рост нагрузки на другие подразделения</label><label class="opt"><input type="checkbox" name="q36" value="Ухудшение клиентского опыта">Ухудшение клиентского опыта</label><label class="opt"><input type="checkbox" name="q36" value="Рост операционных затрат">Рост операционных затрат</label><label class="opt"><input type="checkbox" name="q36" value="Репутационные потери">Репутационные потери</label><label class="opt"><input type="checkbox" name="q36" value="Не оценивалось">Не оценивалось</label></div></div>
+
+<!-- БЛОК 9 -->
+<div class="block-header"><div class="block-num">9</div><div class="block-label">Процессы и взаимодействие</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">37</div><div class="q-body"><div class="q-text">Насколько эффективно КЦ взаимодействует с другими подразделениями банка?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="37" data-type="single"><label class="opt"><input type="radio" name="q37" value="Эффективно">Эффективно</label><label class="opt"><input type="radio" name="q37" value="Скорее эффективно">Скорее эффективно</label><label class="opt"><input type="radio" name="q37" value="Частично эффективно">Частично эффективно</label><label class="opt"><input type="radio" name="q37" value="Скорее неэффективно">Скорее неэффективно</label><label class="opt"><input type="radio" name="q37" value="Неэффективно">Неэффективно</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">38</div><div class="q-body"><div class="q-text">Есть ли процессы, в которых КЦ критически зависит от других подразделений?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="38" data-type="single"><label class="opt"><input type="radio" name="q38" value="Да, в значительной степени">Да, в значительной степени</label><label class="opt"><input type="radio" name="q38" value="Да, частично">Да, частично</label><label class="opt"><input type="radio" name="q38" value="Практически нет">Практически нет</label><label class="opt"><input type="radio" name="q38" value="Не анализировалось">Не анализировалось</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">39</div><div class="q-body"><div class="q-text">Какие проблемы чаще всего возникают во взаимодействии КЦ с другими подразделениями?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="39" data-type="multi"><label class="opt"><input type="checkbox" name="q39" value="Долгие сроки ответа">Долгие сроки ответа</label><label class="opt"><input type="checkbox" name="q39" value="Нет обратной связи">Нет обратной связи</label><label class="opt"><input type="checkbox" name="q39" value="Нет прозрачного маршрута решения">Нет прозрачного маршрута решения</label><label class="opt"><input type="checkbox" name="q39" value="Размыта ответственность">Размыта ответственность</label><label class="opt"><input type="checkbox" name="q39" value="Нет единых SLA">Нет единых SLA</label><label class="opt"><input type="checkbox" name="q39" value="Нет актуальной информации для сотрудников КЦ">Нет актуальной информации для сотрудников КЦ</label><label class="opt"><input type="checkbox" name="q39" value="Не анализировалось">Не анализировалось</label><label class="opt"><input type="checkbox" name="q39" value="Другое">Другое</label></div></div>
+
+<!-- БЛОК 10 -->
+<div class="block-header"><div class="block-num">10</div><div class="block-label">Технологии и аналитика</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">40</div><div class="q-body"><div class="q-text">Достаточны ли текущие системы КЦ для эффективной работы?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="40" data-type="single"><label class="opt"><input type="radio" name="q40" value="Да, полностью">Да, полностью</label><label class="opt"><input type="radio" name="q40" value="Скорее да">Скорее да</label><label class="opt"><input type="radio" name="q40" value="Частично">Частично</label><label class="opt"><input type="radio" name="q40" value="Скорее нет">Скорее нет</label><label class="opt"><input type="radio" name="q40" value="Нет">Нет</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">41</div><div class="q-body"><div class="q-text">Какие ограничения в системах мешают работе КЦ?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="41" data-type="multi"><label class="opt"><input type="checkbox" name="q41" value="Нет единого окна оператора">Нет единого окна оператора</label><label class="opt"><input type="checkbox" name="q41" value="Нет полной истории клиента">Нет полной истории клиента</label><label class="opt"><input type="checkbox" name="q41" value="Недостаточная интеграция систем">Недостаточная интеграция систем</label><label class="opt"><input type="checkbox" name="q41" value="Нет удобной аналитики">Нет удобной аналитики</label><label class="opt"><input type="checkbox" name="q41" value="Нет актуальной базы знаний">Нет актуальной базы знаний</label><label class="opt"><input type="checkbox" name="q41" value="Слишком много ручных действий">Слишком много ручных действий</label><label class="opt"><input type="checkbox" name="q41" value="Ограниченные возможности автоматизации">Ограниченные возможности автоматизации</label><label class="opt"><input type="checkbox" name="q41" value="Проблем нет">Проблем нет</label><label class="opt"><input type="checkbox" name="q41" value="Другое">Другое</label></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">42</div><div class="q-body"><div class="q-text">Достаточен ли текущий уровень аналитики для управления КЦ?</div><div class="q-hint">Один вариант</div></div></div>
+<div class="opts" data-q="42" data-type="single"><label class="opt"><input type="radio" name="q42" value="Да">Да</label><label class="opt"><input type="radio" name="q42" value="Частично">Частично</label><label class="opt"><input type="radio" name="q42" value="Нет">Нет</label><label class="opt"><input type="radio" name="q42" value="Аналитика есть, но используется не в полной мере">Аналитика есть, но используется не в полной мере</label></div></div>
+
+<!-- БЛОК 11 -->
+<div class="block-header"><div class="block-num">11</div><div class="block-label">Приоритеты обследования</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">43</div><div class="q-body"><div class="q-text">Какие задачи обследования КЦ наиболее важны для вас?</div><div class="q-hint">Множественный выбор — до 5 вариантов</div></div></div>
+<div class="opts" data-q="43" data-type="multi" data-max="5"><label class="opt"><input type="checkbox" name="q43" value="Понять стратегическую роль КЦ">Понять стратегическую роль КЦ</label><label class="opt"><input type="checkbox" name="q43" value="Оценить соответствие КЦ клиентской стратегии банка">Оценить соответствие КЦ клиентской стратегии банка</label><label class="opt"><input type="checkbox" name="q43" value="Понять реальную ценность КЦ для бизнеса">Понять реальную ценность КЦ для бизнеса</label><label class="opt"><input type="checkbox" name="q43" value="Найти точки потери клиентов">Найти точки потери клиентов</label><label class="opt"><input type="checkbox" name="q43" value="Оценить текущие KPI / KPA">Оценить текущие KPI / KPA</label><label class="opt"><input type="checkbox" name="q43" value="Проверить качество обслуживания">Проверить качество обслуживания</label><label class="opt"><input type="checkbox" name="q43" value="Оценить влияние КЦ на продажи и удержание">Оценить влияние КЦ на продажи и удержание</label><label class="opt"><input type="checkbox" name="q43" value="Понять проблемные зоны во взаимодействии с подразделениями">Понять проблемные зоны во взаимодействии с подразделениями</label><label class="opt"><input type="checkbox" name="q43" value="Выявить потребность в трансформации">Выявить потребность в трансформации</label><label class="opt"><input type="checkbox" name="q43" value="Подготовить основу для стратегии развития КЦ">Подготовить основу для стратегии развития КЦ</label></div>
+<div class="max-note" id="lim43">Выбрано: 0 из 5</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">44</div><div class="q-body"><div class="q-text">Какой результат вы ожидаете по итогам обследования?</div><div class="q-hint">Множественный выбор</div></div></div>
+<div class="opts" data-q="44" data-type="multi"><label class="opt"><input type="checkbox" name="q44" value="Диагностика текущего состояния КЦ">Диагностика текущего состояния КЦ</label><label class="opt"><input type="checkbox" name="q44" value="Карта проблем и потерь">Карта проблем и потерь</label><label class="opt"><input type="checkbox" name="q44" value="Оценка бизнес-ценности КЦ">Оценка бизнес-ценности КЦ</label><label class="opt"><input type="checkbox" name="q44" value="Оценка соответствия клиентской стратегии">Оценка соответствия клиентской стратегии</label><label class="opt"><input type="checkbox" name="q44" value="Рекомендации по KPI / KPA">Рекомендации по KPI / KPA</label><label class="opt"><input type="checkbox" name="q44" value="Рекомендации по процессам">Рекомендации по процессам</label><label class="opt"><input type="checkbox" name="q44" value="Рекомендации по организационной модели">Рекомендации по организационной модели</label><label class="opt"><input type="checkbox" name="q44" value="Рекомендации по технологиям">Рекомендации по технологиям</label><label class="opt"><input type="checkbox" name="q44" value="Дорожная карта изменений">Дорожная карта изменений</label></div></div>
+
+<!-- БЛОК 12 -->
+<div class="block-header"><div class="block-num">12</div><div class="block-label">Открытые вопросы</div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">45</div><div class="q-body"><div class="q-text">Кто, на ваш взгляд, должен быть владельцем функции Контакт-центра в банке?</div><div class="q-hint">Свободный ответ</div></div></div>
+<div style="padding-left:38px;padding-right:2px"><textarea class="free" id="q45" placeholder="Напишите ваш ответ..."></textarea></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">46</div><div class="q-body"><div class="q-text">Что вы считаете самой большой проблемой Контакт-центра сегодня?</div><div class="q-hint">Свободный ответ</div></div></div>
+<div style="padding-left:38px;padding-right:2px"><textarea class="free" id="q46" placeholder="Напишите ваш ответ..."></textarea></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">47</div><div class="q-body"><div class="q-text">Что вы считаете сильной стороной Контакт-центра сегодня?</div><div class="q-hint">Свободный ответ</div></div></div>
+<div style="padding-left:38px;padding-right:2px"><textarea class="free" id="q47" placeholder="Напишите ваш ответ..."></textarea></div></div>
+
+<div class="q-card"><div class="q-top"><div class="q-badge">48</div><div class="q-body"><div class="q-text">Какие изменения дадут наибольший эффект для банка в первую очередь?</div><div class="q-hint">Свободный ответ</div></div></div>
+<div style="padding-left:38px;padding-right:2px"><textarea class="free" id="q48" placeholder="Напишите ваш ответ..."></textarea></div></div>
+
+<!-- SUBMIT -->
+<div class="submit-box">
+  <h3>Готовы отправить?</h3>
+  <p>Татьяна Сайфарова обработает ваши ответы<br>и подготовит персональные рекомендации по КЦ.</p>
+  <button class="submit-btn" onclick="doSubmit()">Отправить опросник →</button>
+  <div class="submit-note">Ответы конфиденциальны и используются только для диагностики</div>
+</div>
+
+</div>
+
+<div id="success">
+  <div class="s-icon">✅</div>
+  <h2>Опросник отправлен!</h2>
+  <p>Спасибо за ваши ответы.<br>Татьяна Сайфарова свяжется с вами в ближайшее время с результатами диагностики.</p>
+</div>
+
+<footer class="site-footer">
+  <p>© 2026 <span>Татьяна Сайфарова</span> · GROW CONSULT · Астана, Казахстан</p>
+</footer>
+
+<script>
+const ans={};
+document.querySelectorAll('.opts').forEach(list=>{
+  const q=list.dataset.q,type=list.dataset.type,max=list.dataset.max?+list.dataset.max:null;
+  list.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('change',function(){
+      const lbl=this.closest('.opt');
+      if(type==='single'){
+        list.querySelectorAll('.opt').forEach(l=>l.classList.remove('on'));
+        if(this.checked){lbl.classList.add('on');ans[q]=this.value;}
+      } else {
+        if(this.checked){
+          if(max&&list.querySelectorAll('input:checked').length>max){this.checked=false;return;}
+          lbl.classList.add('on');
+          if(!ans[q])ans[q]=[];
+          if(!ans[q].includes(this.value))ans[q].push(this.value);
+        } else {
+          lbl.classList.remove('on');
+          if(ans[q])ans[q]=ans[q].filter(v=>v!==this.value);
+        }
+        if(max){
+          const n=list.querySelectorAll('input:checked').length;
+          const el=document.getElementById('lim'+q);
+          if(el)el.textContent='Выбрано: '+n+' из '+max;
+        }
+      }
+      updateProg();
+    });
+  });
+});
+document.querySelectorAll('textarea.free').forEach(ta=>{
+  ta.addEventListener('input',function(){ans[this.id.replace('q','')]=this.value;updateProg();});
+});
+function updateProg(){
+  const total=48;
+  const done=Object.keys(ans).filter(k=>{const v=ans[k];return Array.isArray(v)?v.length>0:(v&&String(v).trim()!=='');}).length;
+  const pct=Math.round(done/total*100);
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+}
+function doSubmit(){
+  console.log('RESULTS:',JSON.stringify(ans,null,2));
+  document.getElementById('form-section').style.display='none';
+  document.getElementById('success').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
