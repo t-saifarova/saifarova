@@ -359,23 +359,38 @@
     .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .ig-cell {
       aspect-ratio: 1; border-radius: 18px; overflow: hidden;
-      position: relative; cursor: pointer;
+      position: relative; cursor: pointer; text-decoration: none;
       transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column; justify-content: flex-end;
     }
-    .ig-cell:hover { transform: scale(1.04); box-shadow: 0 16px 40px rgba(22,22,42,0.14); }
-    .ig-cell img { width: 100%; height: 100%; object-fit: cover; }
-    .ig-overlay {
-      position: absolute; inset: 0; background: rgba(22,22,42,0.68);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: opacity 0.25s; color: white; font-size: 14px; font-weight: 700;
+    .ig-cell:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(22,22,42,0.18); }
+    .ig-post-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 100%);
     }
-    .ig-cell:hover .ig-overlay { opacity: 1; }
-    .ig-ph {
-      width: 100%; height: 100%; background: var(--bg);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 8px; color: var(--text-light); font-size: 13px; font-weight: 500;
+    .ig-post-bg.theme-ai   { background: linear-gradient(145deg,#0f0c29,#302b63,#24243e); }
+    .ig-post-bg.theme-cx   { background: linear-gradient(145deg,#1a1a2e,#FF5C35cc,#1a1a2e); }
+    .ig-post-bg.theme-dt   { background: linear-gradient(145deg,#134e5e,#71b280); }
+    .ig-post-emoji { position: absolute; top: 18px; right: 20px; font-size: 36px; opacity: 0.22; }
+    .ig-post-body {
+      position: relative; z-index: 2; padding: 20px 18px 18px;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 100%);
     }
-    .ig-ph-icon { font-size: 30px; }
+    .ig-post-tag {
+      display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 7px;
+      background: rgba(255,92,53,0.15); border-radius: 20px; padding: 3px 9px;
+    }
+    .ig-post-title {
+      font-size: 13px; font-weight: 700; color: #fff; line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    .ig-post-cta {
+      font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px;
+    }
+    .ig-post-cta::after { content: '→'; }
+    .ig-cell:hover .ig-post-cta { color: var(--orange); }
     .ig-last {
       background: linear-gradient(145deg, var(--orange), #ff7b5c);
     }
@@ -939,24 +954,48 @@
       </a>
     </div>
     <div class="social-grid">
+
+      <!-- Пост 1: AI Leaders -->
       <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell">
-        <div class="ig-ph"><div class="ig-ph-icon">📸</div><div>Instagram</div></div>
-        <div class="ig-overlay">Смотреть →</div>
+        <div class="ig-post-bg theme-ai"></div>
+        <div class="ig-post-emoji">🤖</div>
+        <div class="ig-post-body">
+          <div class="ig-post-tag">AI Leaders 2026</div>
+          <div class="ig-post-title">Как LLM меняет клиентский сервис: 3 сдвига, которые уже происходят</div>
+          <div class="ig-post-cta">Читать в Instagram</div>
+        </div>
       </a>
+
+      <!-- Пост 2: Клиентология -->
       <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell">
-        <div class="ig-ph"><div class="ig-ph-icon">📸</div><div>Instagram</div></div>
-        <div class="ig-overlay">Смотреть →</div>
+        <div class="ig-post-bg theme-cx"></div>
+        <div class="ig-post-emoji">💡</div>
+        <div class="ig-post-body">
+          <div class="ig-post-tag">Клиентология</div>
+          <div class="ig-post-title">Почему «без усилий» важнее «восторга»: Effortless Experience на практике</div>
+          <div class="ig-post-cta">Читать в Instagram</div>
+        </div>
       </a>
+
+      <!-- Пост 3: Design Thinking -->
       <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell">
-        <div class="ig-ph"><div class="ig-ph-icon">📸</div><div>Instagram</div></div>
-        <div class="ig-overlay">Смотреть →</div>
+        <div class="ig-post-bg theme-dt"></div>
+        <div class="ig-post-emoji">✏️</div>
+        <div class="ig-post-body">
+          <div class="ig-post-tag">Дизайн-мышление</div>
+          <div class="ig-post-title">Как Airbnb спас бизнес через дизайн-мышление — кейс с фотографиями</div>
+          <div class="ig-post-cta">Читать в Instagram</div>
+        </div>
       </a>
+
+      <!-- 4-я: Все посты -->
       <a href="https://www.instagram.com/tanyasaifarova" target="_blank" rel="noopener" class="ig-cell ig-last">
         <div class="ig-last-inner">
           <div class="ig-last-arrow">→</div>
           <div class="ig-last-text">Все публикации<br>в Instagram</div>
         </div>
       </a>
+
     </div>
     <p class="social-follow">
       Подписывайтесь:&nbsp;
