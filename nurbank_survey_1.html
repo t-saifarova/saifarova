@@ -62,6 +62,20 @@ textarea.free{width:100%;border:1.5px solid var(--border);border-radius:10px;pad
 textarea.free:focus{border-color:var(--accent);background:#fff}
 .max-note{font-size:11px;color:#bbb;margin-top:6px;padding-left:38px}
 
+/* IDENTIFICATION BLOCK */
+.id-block{background:linear-gradient(135deg,#fff9f7,#fff);border:2px solid var(--accent);border-radius:20px;padding:28px 28px 24px;margin-bottom:28px}
+.id-block-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:var(--dark);margin-bottom:6px}
+.id-block-sub{font-size:12px;color:var(--mid);margin-bottom:22px;line-height:1.5}
+.id-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.id-field{display:flex;flex-direction:column;gap:5px}
+.id-field.full{grid-column:1/-1}
+.id-label{font-size:11px;font-weight:700;color:var(--dark);letter-spacing:0.5px;text-transform:uppercase}
+.id-label span{color:var(--accent)}
+.id-input{border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-size:13px;font-family:'Manrope',sans-serif;outline:none;color:var(--dark);background:#fff;transition:border-color 0.2s}
+.id-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,92,53,0.08)}
+.id-input.error{border-color:#e74c3c;background:#fff5f5}
+@media(max-width:600px){.id-grid{grid-template-columns:1fr}}
+
 /* SUBMIT */
 .submit-box{background:var(--dark);border-radius:20px;padding:36px 32px;margin-top:28px;text-align:center;position:relative;overflow:hidden}
 .submit-box::before{content:'→';position:absolute;right:20px;bottom:-20px;font-size:120px;color:rgba(255,255,255,0.03);font-weight:900}
@@ -118,6 +132,34 @@ textarea.free:focus{border-color:var(--accent);background:#fff}
 </div>
 
 <div class="form-wrap" id="form-section">
+
+<!-- ИДЕНТИФИКАЦИЯ -->
+<div class="id-block">
+  <div class="id-block-title">Сначала — немного о вас</div>
+  <div class="id-block-sub">Чтобы я могла подготовить персональные рекомендации, пожалуйста, заполните контактные данные. Вся информация конфиденциальна.</div>
+  <div class="id-grid">
+    <div class="id-field">
+      <div class="id-label">Имя и фамилия <span>*</span></div>
+      <input class="id-input" id="id_name" type="text" placeholder="Иван Иванов">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Должность <span>*</span></div>
+      <input class="id-input" id="id_position" type="text" placeholder="Руководитель КЦ">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Компания <span>*</span></div>
+      <input class="id-input" id="id_company" type="text" placeholder="Название банка / компании">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Email <span>*</span></div>
+      <input class="id-input" id="id_email" type="email" placeholder="ivan@bank.kz">
+    </div>
+    <div class="id-field full">
+      <div class="id-label">Телефон / WhatsApp</div>
+      <input class="id-input" id="id_phone" type="tel" placeholder="+7 (___) ___-__-__">
+    </div>
+  </div>
+</div>
 
 <!-- БЛОК 1 -->
 <div class="block-header"><div class="block-num">1</div><div class="block-label">Клиентская стратегия и место КЦ</div></div>
@@ -372,6 +414,24 @@ function updateProg(){
   document.getElementById('prog-pct').textContent=pct+'%';
 }
 function doSubmit(){
+  // Валидация контактных данных
+  const name     = document.getElementById('id_name').value.trim();
+  const position = document.getElementById('id_position').value.trim();
+  const company  = document.getElementById('id_company').value.trim();
+  const email    = document.getElementById('id_email').value.trim();
+  const phone    = document.getElementById('id_phone').value.trim();
+
+  let hasError = false;
+  ['id_name','id_position','id_company','id_email'].forEach(function(id){
+    const el = document.getElementById(id);
+    if(!el.value.trim()){ el.classList.add('error'); hasError = true; }
+    else { el.classList.remove('error'); }
+  });
+  if(hasError){
+    document.getElementById('id_name').closest('.id-block').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
   // Формируем текст письма из всех ответов
   const labels = {
     1:'1. Сколько операторов в КЦ?',2:'2. Режим работы',3:'3. Тип КЦ',4:'4. Текучесть кадров',
@@ -393,6 +453,13 @@ function doSubmit(){
 
   let body = '📋 ДИАГНОСТИКА КОНТАКТ-ЦЕНТРА\n';
   body += '═'.repeat(50) + '\n\n';
+  body += '👤 КТО ЗАПОЛНИЛ:\n';
+  body += '   Имя:       ' + name + '\n';
+  body += '   Должность: ' + position + '\n';
+  body += '   Компания:  ' + company + '\n';
+  body += '   Email:     ' + email + '\n';
+  if(phone) body += '   Телефон:   ' + phone + '\n';
+  body += '\n' + '─'.repeat(50) + '\n\n';
   for(let i=1;i<=48;i++){
     const v = ans[i];
     if(v !== undefined && v !== null && v !== ''){
@@ -407,7 +474,7 @@ function doSubmit(){
     method: 'POST',
     headers: {'Content-Type':'application/json','Accept':'application/json'},
     body: JSON.stringify({
-      _subject: '📋 Диагностика КЦ — новый опросник ('+Object.keys(ans).length+' ответов)',
+      _subject: '📋 Диагностика КЦ — ' + name + ', ' + company + ' (' + Object.keys(ans).length + ' ответов)',
       _template: 'box',
       message: body
     })
